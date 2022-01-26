@@ -2,6 +2,7 @@ const express = require("express");
 const sequelize = require("./config/connection");
 const { ApolloServer } = require("apollo-server-express");
 const { typeDefs, resolvers } = require("./Schemas");
+const { authMiddleware } = require("./utils/auth");
 
 (async function() {
   const app = express();

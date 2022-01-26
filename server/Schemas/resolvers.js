@@ -13,13 +13,25 @@ const resolvers = {
       try {
         const user = await User.create({ first_name ,last_name, email, password, user_type});
         const token = signToken(user);
-        console.log(token)
-        return user;
+        return {token, user};
       } catch (e) {
         console.log(e);
         return (e)
       }
     },
+    login: async (root, { email, password }) => {
+      const user = await User.findOne({ email });
+      if (!user) {
+        throw new AuthenticationError("Incorrect credentials (Username)");
+      }
+      const correctPw = await user.checkPassword(password);
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect credentials (password)");
+      }
+      const token = signToken(user);
+      return { token, user };
+    },
+
   },
 };
 
