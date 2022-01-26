@@ -17,7 +17,7 @@ const resolvers = {
         return user;
       } catch (e) {
         console.log(e);
-        return req.status(400)
+        return (e)
       }
     },
   },
