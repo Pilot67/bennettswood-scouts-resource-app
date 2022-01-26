@@ -10,7 +10,10 @@ const typeDefs = gql`
     user_type: String!
     authorised_user: Boolean
   }
-
+  type Resources {
+    id: Int!
+  }
+  
   type Auth {
     token: ID!
     user: User
