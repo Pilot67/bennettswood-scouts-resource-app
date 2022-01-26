@@ -59,7 +59,6 @@ const resolvers = {
       context
     ) => {
       if (context.user) {
-        console.log("Past #1");
         if (context.user.user_type === "ADMIN" && !id) {
           id = context.user.id;
         } else if (context.user.user_type !== "ADMIN") {
@@ -67,18 +66,20 @@ const resolvers = {
           user_type = undefined;
           authorised_user = undefined;
         }
+
         try {
           const updatedUser = await User.update(
             {
-              first_name: first_name,
-              last_name: last_name,
-              email: email,
-              password: password,
-              user_type: user_type,
-              authorised_user: authorised_user,
+              first_name,
+              last_name,
+              email,
+              password,
+              user_type,
+              authorised_user,
             },
             {
               where: { id: id },
+              individualHooks: true,
             }
           );
           try {
@@ -91,7 +92,7 @@ const resolvers = {
             return e;
           }
         } catch (e) {
-          throw new AuthenticationError("You need to be logged in! #1");
+          return e;
         }
       }
       throw new AuthenticationError("You need to be logged in! #2");
