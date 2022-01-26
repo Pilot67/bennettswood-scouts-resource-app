@@ -29,7 +29,7 @@ const typeDefs = gql`
     ): Auth
     login(email: String!, password: String!): Auth
     updateUser(
-      id : Int
+      id: Int
       email: String
       password: String
       first_name: String
@@ -37,6 +37,7 @@ const typeDefs = gql`
       user_type: String
       authorised_user: Boolean
     ): Auth
+    deleteUser(id: Int): Auth
   }
 `;
 

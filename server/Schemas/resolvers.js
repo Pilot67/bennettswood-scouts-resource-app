@@ -58,10 +58,6 @@ const resolvers = {
       },
       context
     ) => {
-      console.log(
-        context.user,
-        `id: ${id}, first_name: ${first_name}, authorised_user: ${authorised_user}`
-      );
       if (context.user) {
         console.log("Past #1");
         if (context.user.user_type === "ADMIN" && !id) {
@@ -87,15 +83,27 @@ const resolvers = {
           );
           try {
             const user = await User.findOne({ where: { id } });
-            if (user===null){
-              throw new UserInputError("User Not Found!")
+            if (user === null) {
+              throw new UserInputError("User Not Found!");
             }
             return { user };
           } catch (e) {
-            return (e)
+            return e;
           }
         } catch (e) {
           throw new AuthenticationError("You need to be logged in! #1");
+        }
+      }
+      throw new AuthenticationError("You need to be logged in! #2");
+    },
+    deleteUser: async (root, { id }, context) => {
+      if (context.user) {
+        try {
+          const deletedUser = User.destroy({ where: { id } });
+          return;
+        } catch (e) {
+          console.log(e);
+          return e;
         }
       }
       throw new AuthenticationError("You need to be logged in! #2");
