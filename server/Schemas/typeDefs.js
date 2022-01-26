@@ -8,6 +8,7 @@ const typeDefs = gql`
     email: String!
     password: String!
     user_type: String!
+    authorised_user: Boolean
   }
 
   type Auth {
@@ -27,6 +28,15 @@ const typeDefs = gql`
       user_type: String!
     ): Auth
     login(email: String!, password: String!): Auth
+    updateUser(
+      id : Int
+      email: String
+      password: String
+      first_name: String
+      last_name: String
+      user_type: String
+      authorised_user: Boolean
+    ): Auth
   }
 `;
 
