@@ -42,6 +42,11 @@ Resources.init(
         is: URL,
       },
     },
+    section: {
+      type: DataTypes.STRING(25),
+      allowNull: true,
+      defaultValue: "GENERAL"
+    },
     date: {
       type: DataTypes.DATE,
       allowNull: false,

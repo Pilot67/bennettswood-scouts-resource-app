@@ -46,7 +46,7 @@ User.init(
       defaultValue: false,
     },
     user_type: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(6),
       allowNull: false,
       validate: {
         is: /LEADER|ADMIN|MEMBER/,
