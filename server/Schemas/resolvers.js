@@ -228,6 +228,22 @@ const resolvers = {
         }
       }
       throw new AuthenticationError("You need to be logged in! #2");
+    },
+    deleteResourcesComment: async (root, {id}, context)=>{
+      if (context.user) {
+        try {
+          const deletedComment = await ResourcesComments.destroy({ where: { id } });
+          if (deletedComment === 0) {
+            throw new UserInputError("Incorrect ID! ");
+          }
+          return;
+        } catch (e) {
+          console.log(e);
+          return e;
+        }
+      }
+      throw new AuthenticationError("You need to be logged in! #2");
+
     }
   },
 };

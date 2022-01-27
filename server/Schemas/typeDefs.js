@@ -82,6 +82,8 @@ const typeDefs = gql`
       title: String!
       description: String
     ): Resources
+
+    deleteResourcesComment(id: Int!): Auth
   }
 `;
 
