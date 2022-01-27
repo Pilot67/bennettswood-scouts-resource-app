@@ -32,14 +32,14 @@ Resources.init(
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
-        is: URL,
+        isURL:true,
       },
     },
     image: {
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
-        is: URL,
+        isURL:true,
       },
     },
     section: {

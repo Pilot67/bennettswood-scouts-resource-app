@@ -144,7 +144,7 @@ const resolvers = {
         try {
           const deletedResource = await Resources.destroy({ where: { id } });
           if (deletedResource === 0) {
-            throw new UserInputError("Incorrect ID! ")
+            throw new UserInputError("Incorrect ID! ");
           }
           return;
         } catch (e) {
@@ -153,6 +153,19 @@ const resolvers = {
         }
       }
       throw new AuthenticationError("You need to be logged in! #2");
+    },
+    addResource: async (root, args, context) => {
+      if (context.user) {
+        try {
+          const newResource = await Resources.create({
+            user_id: context.user.id,
+            ...args,
+          });
+          return  newResource ;
+        } catch (e) {
+          return e;
+        }
+      }
     },
   },
 };
