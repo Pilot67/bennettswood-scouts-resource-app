@@ -143,8 +143,7 @@ const resolvers = {
       if (context.user) {
         try {
           const deletedResource = await Resources.destroy({ where: { id } });
-          console.log(deletedResource)
-          if (deletedResource === null) {
+          if (deletedResource === 0) {
             throw new UserInputError("Incorrect ID! ")
           }
           return;
