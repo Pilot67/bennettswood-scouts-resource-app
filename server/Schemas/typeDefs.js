@@ -12,8 +12,16 @@ const typeDefs = gql`
   }
   type Resources {
     id: Int!
+    user_id: Int!
+    title: String!
+    description: String
+    link: String
+    image: String
+    section: String
+    date: String!
+    user: User
   }
-  
+
   type Auth {
     token: ID!
     user: User
@@ -21,6 +29,7 @@ const typeDefs = gql`
 
   type Query {
     users: [User]
+    resources: [Resources]
   }
   type Mutation {
     addUser(

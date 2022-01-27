@@ -2,13 +2,21 @@ const {
   AuthenticationError,
   UserInputError,
 } = require("apollo-server-express");
-const { User } = require("../models");
+//const { Model } = require("sequelize/dist");
+const { User, Resources } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
     users: async () => {
       return await User.findAll();
+    },
+    resources: async () => {
+      return await Resources.findAll({
+        include: {
+          model: User,
+        },
+      });
     },
   },
   Mutation: {
@@ -78,7 +86,7 @@ const resolvers = {
               authorised_user,
             },
             {
-              where: { id: id },
+              where: { id },
               individualHooks: true,
             }
           );
