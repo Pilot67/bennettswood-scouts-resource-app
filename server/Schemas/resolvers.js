@@ -166,6 +166,7 @@ const resolvers = {
           return e;
         }
       }
+      throw new AuthenticationError("You need to be logged in! #2");
     },
   },
 };

@@ -21,6 +21,16 @@ const typeDefs = gql`
     date: String!
     user: User
   }
+  type ResourcesComments {
+    id: Int!
+    user_id: Int!
+    resources_id: Int!
+    title: String!
+    description: String
+    date: String!
+    user: User
+    resources: Resources
+  }
 
   type Auth {
     token: ID!
