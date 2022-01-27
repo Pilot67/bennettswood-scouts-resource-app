@@ -56,6 +56,7 @@ const typeDefs = gql`
       password: String!
       user_type: String!
     ): Auth
+
     updateUser(
       id: Int
       email: String
@@ -65,13 +66,21 @@ const typeDefs = gql`
       user_type: String
       authorised_user: Boolean
     ): Auth
+
     deleteResource(id: Int!): Auth
+
     addResource(
       title: String!
       description: String
       link: String
       image: String
       section: String
+    ): Resources
+
+    addResourceComment (
+      resources_id: Int!
+      title: String!
+      description: String
     ): Resources
   }
 `;

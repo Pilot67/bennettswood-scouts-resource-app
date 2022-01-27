@@ -2,7 +2,6 @@ const {
   AuthenticationError,
   UserInputError,
 } = require("apollo-server-express");
-//const { Model } = require("sequelize/dist");
 const { User, Resources, ResourcesComments } = require("../models");
 const { signToken } = require("../utils/auth");
 
@@ -198,6 +197,38 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in! #2");
     },
+
+    addResourceComment: async(root, args, context) =>{
+      if (context.user){
+        try{
+          const newComment = await ResourcesComments.create({
+            user_id:context.user.id,
+            ...args,
+          })
+          console.log(newComment)
+          const updatedResources = await Resources.findByPk(args.resources_id, {
+            include: [
+              {
+                model: User,
+              },
+              {
+                model: ResourcesComments,
+                include: [
+                  {
+                    model: User,
+                  },
+                ],
+              },
+            ],
+          });
+          return updatedResources
+        }catch (e) {
+          console.log(e)
+          return e;
+        }
+      }
+      throw new AuthenticationError("You need to be logged in! #2");
+    }
   },
 };
 
