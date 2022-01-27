@@ -1,0 +1,20 @@
+[
+    {
+        "user_id":"1",
+        "resources_id":"1",
+        "title":"This is my first comment",
+        "description":"this is a great looking game, Thanks"
+    },
+    {
+        "user_id":"2",
+        "resources_id":"1",
+        "title":"This is my second comment",
+        "description":"I'll use this soon"
+    },
+    {
+        "user_id":"2",
+        "resources_id":"2",
+        "title":"This is my third comment",
+        "description":"Looking Good"
+    }
+]

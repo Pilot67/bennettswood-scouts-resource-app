@@ -10,7 +10,7 @@ const typeDefs = gql`
     user_type: String!
     authorised_user: Boolean
   }
-  type Resources {
+    type Resources {
     id: Int!
     user_id: Int!
     title: String!
@@ -20,6 +20,8 @@ const typeDefs = gql`
     section: String
     date: String!
     user: User
+    resourcescomments: [ResourcesComments]
+
   }
   type ResourcesComments {
     id: Int!
@@ -29,7 +31,7 @@ const typeDefs = gql`
     description: String
     date: String!
     user: User
-    resources: Resources
+    resources: [Resources]
   }
 
   type Auth {

@@ -3,7 +3,7 @@ const {
   UserInputError,
 } = require("apollo-server-express");
 //const { Model } = require("sequelize/dist");
-const { User, Resources } = require("../models");
+const { User, Resources, ResourcesComments } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -13,17 +13,37 @@ const resolvers = {
     },
     resources: async () => {
       return await Resources.findAll({
-        include: {
-          model: User,
-        },
+        include: [
+          {
+            model: User,
+          },
+          {
+            model: ResourcesComments,
+            include: [
+              {
+                model: User,
+              },
+            ],
+          },
+        ],
       });
     },
     resource: async (root, { id }, context) => {
       if (context.user) {
         return await Resources.findByPk(id, {
-          include: {
-            model: User,
-          },
+          include: [
+            {
+              model: User,
+            },
+            {
+              model: ResourcesComments,
+              include: [
+                {
+                  model: User,
+                },
+              ],
+            },
+          ],
         });
       }
       throw new AuthenticationError("You need to be logged in! #2");
@@ -32,9 +52,19 @@ const resolvers = {
       if (context.user) {
         return await Resources.findAll({
           where: { user_id },
-          include: {
-            model: User,
-          },
+          include: [
+            {
+              model: User,
+            },
+            {
+              model: ResourcesComments,
+              include: [
+                {
+                  model: User,
+                },
+              ],
+            },
+          ],
         });
       }
       throw new AuthenticationError("You need to be logged in! #2");
@@ -161,7 +191,7 @@ const resolvers = {
             user_id: context.user.id,
             ...args,
           });
-          return  newResource ;
+          return newResource;
         } catch (e) {
           return e;
         }
