@@ -30,6 +30,8 @@ const typeDefs = gql`
   type Query {
     users: [User]
     resources: [Resources]
+    resource(id:Int):Resources
+    resourceByUser(user_id:Int):[Resources]
   }
   type Mutation {
     addUser(
@@ -49,7 +51,7 @@ const typeDefs = gql`
       user_type: String
       authorised_user: Boolean
     ): Auth
-    deleteUser(id: Int): Auth
+    deleteUser(id: Int!): Auth
   }
 `;
 

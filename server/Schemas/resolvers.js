@@ -18,7 +18,23 @@ const resolvers = {
         },
       });
     },
+    resource: async (root,{id}, context)=>{
+      return await Resources.findByPk(id, {
+        include: {
+          model: User,
+        },
+      });
+    },
+    resourceByUser: async (root,{user_id}, context)=>{
+      return await Resources.findAll({
+        where: {user_id},
+        include: {
+          model: User,
+        },
+      });
+    }
   },
+
   Mutation: {
     addUser: async (
       root,
