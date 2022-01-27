@@ -18,21 +18,27 @@ const resolvers = {
         },
       });
     },
-    resource: async (root,{id}, context)=>{
-      return await Resources.findByPk(id, {
-        include: {
-          model: User,
-        },
-      });
+    resource: async (root, { id }, context) => {
+      if (context.user) {
+        return await Resources.findByPk(id, {
+          include: {
+            model: User,
+          },
+        });
+      }
+      throw new AuthenticationError("You need to be logged in! #2");
     },
-    resourceByUser: async (root,{user_id}, context)=>{
-      return await Resources.findAll({
-        where: {user_id},
-        include: {
-          model: User,
-        },
-      });
-    }
+    resourceByUser: async (root, { user_id }, context) => {
+      if (context.user) {
+        return await Resources.findAll({
+          where: { user_id },
+          include: {
+            model: User,
+          },
+        });
+      }
+      throw new AuthenticationError("You need to be logged in! #2");
+    },
   },
 
   Mutation: {
