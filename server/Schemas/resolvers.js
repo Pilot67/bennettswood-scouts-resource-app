@@ -130,7 +130,23 @@ const resolvers = {
     deleteUser: async (root, { id }, context) => {
       if (context.user) {
         try {
-          const deletedUser = User.destroy({ where: { id } });
+          const deletedUser = await User.destroy({ where: { id } });
+          return;
+        } catch (e) {
+          console.log(e);
+          return e;
+        }
+      }
+      throw new AuthenticationError("You need to be logged in! #2");
+    },
+    deleteResource: async (root, { id }, context) => {
+      if (context.user) {
+        try {
+          const deletedResource = await Resources.destroy({ where: { id } });
+          console.log(deletedResource)
+          if (deletedResource === null) {
+            throw new UserInputError("Incorrect ID! ")
+          }
           return;
         } catch (e) {
           console.log(e);

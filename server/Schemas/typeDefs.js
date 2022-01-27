@@ -25,6 +25,7 @@ const typeDefs = gql`
   type Auth {
     token: ID!
     user: User
+    resources: Resources
   }
 
   type Query {
@@ -52,6 +53,7 @@ const typeDefs = gql`
       authorised_user: Boolean
     ): Auth
     deleteUser(id: Int!): Auth
+    deleteResource(id: Int!): Auth
   }
 `;
 
