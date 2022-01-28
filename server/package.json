@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "seed": "node seeds/seeds.js"
+    "seed": "node seeds/seeds.js",
+    "watch": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,5 +21,8 @@
     "lodash": "^4.17.21",
     "mysql2": "^2.3.3",
     "sequelize": "^6.14.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
