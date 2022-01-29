@@ -1,14 +1,21 @@
-import React from 'react';
+import React from "react";
+import { Nav, NavMenu , SignBtn} from "./Navbar.Styled";
 
-const Navbar =() => {
-
-    return (
-        <>
-        <h1>Nav Menu</h1>
-        </>
-    )
-}
-
-
+const Navbar = () => {
+  return (
+    <Nav>
+      <h1>Nav Logo</h1>
+      <NavMenu>
+        <h1>Joeys</h1>
+        <h1>Joeys</h1>
+        <h1>Joeys</h1>
+        <h1>Joeys</h1>
+      </NavMenu>{" "}
+      <SignBtn>
+        Login / Sign up
+      </SignBtn>
+    </Nav>
+  );
+};
 
 export default Navbar;
