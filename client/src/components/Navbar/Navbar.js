@@ -1,19 +1,35 @@
 import React from "react";
-import { Nav, NavMenu , SignBtn} from "./Navbar.Styled";
+import menuLogo from "./images/bennettswood-192x192.png";
+import {
+  Nav,
+  NavMenu,
+  SignBtn,
+  SectionBtn,
+  logoBox,
+  logo,
+} from "./Navbar.Styled";
 
 const Navbar = () => {
   return (
     <Nav>
-      <h1>Nav Logo</h1>
+      <logoBox>
+        <logo src={menuLogo} alt="Logo"/>
+      </logoBox>
       <NavMenu>
-        <h1>Joeys</h1>
-        <h1>Joeys</h1>
-        <h1>Joeys</h1>
-        <h1>Joeys</h1>
+        <SectionBtn color={"white"} background={"--joeys"}>
+          Joeys
+        </SectionBtn>
+        <SectionBtn color={"black"} background={"--cubs"}>
+          Cubs
+        </SectionBtn>
+        <SectionBtn color={"black"} background={"--scouts"}>
+          Scouts
+        </SectionBtn>
+        <SectionBtn color={"white"} background={"--venturers"}>
+          Venturers
+        </SectionBtn>
       </NavMenu>{" "}
-      <SignBtn>
-        Login / Sign up
-      </SignBtn>
+      <SignBtn>Login / Sign up</SignBtn>
     </Nav>
   );
 };
