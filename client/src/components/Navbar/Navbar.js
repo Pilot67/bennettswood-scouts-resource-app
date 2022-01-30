@@ -1,35 +1,52 @@
-import React from "react";
-import menuLogo from "./images/bennettswood-192x192.png";
+import React, { useState } from "react";
+import { FaTimes, FaBars } from "react-icons/fa";
+import menuLogo from "../../images/bennettswood-192x192.png";
 import {
   Nav,
   NavMenu,
   SignBtn,
-  SectionBtn,
-  logoBox,
-  logo,
+  LogoBox,
+  Logo,
+  SignMobileBtn,
+  HamburgerMenu,
+  SectionLink,
 } from "./Navbar.Styled";
 
 const Navbar = () => {
+  const [click, setClick] = useState(false);
+  const handleHamburgerClick = () => setClick(!click);
+  const handleMenuItemClick = () => setClick(false);
+
   return (
     <Nav>
-      <logoBox>
-        <logo src={menuLogo} alt="Logo"/>
-      </logoBox>
-      <NavMenu>
-        <SectionBtn color={"white"} background={"--joeys"}>
+      <LogoBox to="/">
+        <Logo
+          src={menuLogo}
+          alt="Bennettswood logo"
+          onClick={handleMenuItemClick}
+        ></Logo>
+      </LogoBox>
+      <NavMenu click={click} onClick={handleMenuItemClick}>
+        <SectionLink to="/Joeys" color={"white"} background={"--joeys"}>
           Joeys
-        </SectionBtn>
-        <SectionBtn color={"black"} background={"--cubs"}>
+        </SectionLink>
+        <SectionLink to="/Cubs" color={"black"} background={"--cubs"}>
           Cubs
-        </SectionBtn>
-        <SectionBtn color={"black"} background={"--scouts"}>
+        </SectionLink>
+        <SectionLink to="/Scouts" color={"black"} background={"--scouts"}>
           Scouts
-        </SectionBtn>
-        <SectionBtn color={"white"} background={"--venturers"}>
+        </SectionLink>
+        <SectionLink to="/Venturers" color={"white"} background={"--venturers"}>
           Venturers
-        </SectionBtn>
-      </NavMenu>{" "}
-      <SignBtn>Login / Sign up</SignBtn>
+        </SectionLink>
+        <SignMobileBtn color={"white"} background={"--venturers"}>
+          Login / Signup
+        </SignMobileBtn>
+      </NavMenu>
+      <SignBtn>Login / Signup</SignBtn>
+      <HamburgerMenu onClick={handleHamburgerClick}>
+        {click ? <FaTimes /> : <FaBars />}
+      </HamburgerMenu>
     </Nav>
   );
 };
