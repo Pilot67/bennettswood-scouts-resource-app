@@ -1,24 +1,25 @@
-import React, {useState} from "react";
-import { ModalContainer } from "./LoginModal.Styled";
+import React, {useState, useRef} from "react";
+import { ModalContainer, ModalWrapper } from "./LoginModal.Styled";
 
 
 
 const LoginModal = (props) => {
-    console.log(props)
 const [modalOpen, setModalOpen]= useState(false)
+const modalRef = useRef()
     
-const modalCloseClick= (event)=> {
-    event.preventDefault()
+const modalCloseClick= (e) => {
+e.stopPropagation();
 console.log("modal close clicked")
-console.log(event.target)
-props.handleModalClose()
+console.log(e.target, e.currentTarget, e)
 }
 
 
   return (
-  <ModalContainer onClick={modalCloseClick}>
-    <h1 >Hello</h1>
+  <ModalContainer ref={modalRef} onClick={modalCloseClick}>
+      <ModalWrapper>
+
     <button >Some random button</button>
+      </ModalWrapper>
   </ModalContainer>
   )
 };
