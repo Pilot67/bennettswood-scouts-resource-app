@@ -18,13 +18,17 @@ import {
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
-  const [login, setLogin] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const handleHamburgerClick = () => setClick(!click);
+  
+const openModal = () => {setShowModal(prev => !prev)}
+  
+  
   const handleMenuItemClick = () => setClick(false);
 
-  const handleLoginClick = () => {
-    setLogin(!login);
-  };
+  // const handleLoginClick = () => {
+  //   setLogin(!login);
+  // };
   
   return (
     <Nav>
@@ -52,17 +56,16 @@ const Navbar = () => {
         <SectionLink to="/Venturers" color={"white"} background={"--venturers"}>
           Venturers
         </SectionLink>
-        <SignMobileBtn color={"white"} background={"--bw-Blue"}>
+        <SignMobileBtn onClick={openModal} color={"white"} background={"--bw-Blue"}>
           Login / Signup
         </SignMobileBtn>
       </NavMenu>
-      <SignBtn onClick={handleLoginClick} >Login / Signup</SignBtn>
-      {login ? <LoginModal handleModalClose={()=>setLogin(!login)}/>: null}
-
-
+      <SignBtn onClick={openModal} >Login / Signup</SignBtn>
       <HamburgerMenu onClick={handleHamburgerClick}>
         {click ? <FaTimes /> : <FaBars />}
       </HamburgerMenu>
+      
+      <LoginModal showModal={showModal} setShowModal={setShowModal} />
     </Nav>
   );
 };

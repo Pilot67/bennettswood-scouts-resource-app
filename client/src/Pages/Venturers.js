@@ -6,10 +6,10 @@ import img from "../images/venturers-1980.jpg";
 
 const Background = styled.div`
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   background: url(${img});
   background-repeat: no-repeat;
-  background-position: 50% 100%;
+  background-position: 100% 50%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-background-size: cover;
@@ -18,6 +18,9 @@ const Background = styled.div`
   background-size: cover;
   background-clip: border-box;
   overflow: auto;
+  @media screen and (max-width:768px) {
+    background-position: 50% 40%;
+  }
 `;
 
 
