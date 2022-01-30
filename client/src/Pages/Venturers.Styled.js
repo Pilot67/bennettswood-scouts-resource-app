@@ -1,10 +1,7 @@
-import React from "react";
-//import { Background } from "./Venturers.Styled";
-import PageContent from "../components/PageContent";
 import styled from "styled-components";
 import img from "../images/venturers-1980.jpg";
 
-const Background = styled.div`
+export const Background = styled.div`
   width: 100%;
   height: 100vh;
   background: url(${img});
@@ -20,13 +17,3 @@ const Background = styled.div`
   overflow: auto;
 `;
 
-
-const Venturers = () => {
-  return (
-    <Background>
-      <PageContent title={"Venturers"}/>
-    </Background>
-  );
-};
-
-export default Venturers;

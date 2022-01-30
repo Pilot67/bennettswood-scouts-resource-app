@@ -1,5 +1,6 @@
 import React from "react";
 import GlobalStyle from "./GlobalStyles";
+import { PageContainer } from "./App.Styled";
 import {
   ApolloClient,
   InMemoryCache,
@@ -14,7 +15,6 @@ import Joeys from "./Pages/Joeys";
 import Cubs from "./Pages/Cubs";
 import Scouts from "./Pages/Scouts";
 import Venturers from "./Pages/Venturers";
-
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -39,18 +39,16 @@ function App() {
   return (
     <Router>
       <GlobalStyle />
-        <header>
-          <Navbar/>
-        </header>
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/Joeys" element={<Joeys />} />
-            <Route path="/Cubs" element={<Cubs />} />
-            <Route path="/Scouts" element={<Scouts />} />
-            <Route path="/Venturers" element={<Venturers />} />
-          </Routes>
-        </main>
+      <PageContainer>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Joeys" element={<Joeys />} />
+          <Route path="/Cubs" element={<Cubs />} />
+          <Route path="/Scouts" element={<Scouts />} />
+          <Route path="/Venturers" element={<Venturers />} />
+        </Routes>
+      </PageContainer>
     </Router>
   );
 }

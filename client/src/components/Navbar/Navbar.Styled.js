@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Nav = styled.nav`
   position: sticky;
+  top: 0;
   width: 100vw;
   height: 120px;
   background-color: var(--bw-Grey);
@@ -10,9 +11,42 @@ export const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+  z-index: 2;
   @media screen and (max-width: 960px) {
     height: 80px;
     padding: 0 5px;
+  }
+`;
+
+export const Lines = styled.div`
+width: 100%;
+  position: absolute;
+  top: 104px;
+  margin-left: 192px;
+  
+  @media screen and (max-width: 960px) {
+    top: 70px;
+    margin-left: 90px;
+  }
+
+`
+export const BlueLine = styled.div`
+  width: 100%;
+  height: 3px;
+  background: var(--bw-Blue);
+  @media screen and (max-width: 960px) {
+    height: 2px;
+  }
+
+`;
+export const RedLine = styled.div`
+  margin-top: 3px;
+  width: 100%;
+  height: 3px;
+  background: var(--bw-Red);
+  @media screen and (max-width: 960px) {
+    margin-top: 2px;
+    height: 2px;
   }
 `;
 
@@ -51,6 +85,8 @@ export const SignBtn = styled.button`
   box-shadow: 0px 2px 7px var(--bw-Black);
   cursor: pointer;
   transition: all 200ms ease;
+  background-color: var(--bw-Blue);
+  color: white;
   :hover {
     box-shadow: 0px 0px 2px var(--bw-Black);
   }
@@ -62,23 +98,6 @@ export const SignBtn = styled.button`
   }
 `;
 
-export const SectionBtn = styled.button`
-  font-size: 1.75rem;
-  padding: 3px 14px;
-  border-radius: 1em;
-  border: none;
-  box-shadow: 0px 2px 7px var(--bw-Black);
-  background-color: var(${({ background }) => background});
-  color: ${({ color }) => color};
-  cursor: pointer;
-  transition: all 200ms ease;
-  :hover {
-    box-shadow: 0px 0px 2px var(--bw-Black);
-  }
-  @media screen and (max-width: 1024px) {
-    font-size: 1.25rem;
-  }
-`;
 export const SectionLink = styled(Link)`
   font-size: 1.75rem;
   padding: 3px 14px;
@@ -88,6 +107,7 @@ export const SectionLink = styled(Link)`
   background-color: var(${({ background }) => background});
   color: ${({ color }) => color};
   cursor: pointer;
+  text-decoration: none;
   transition: all 200ms ease;
   :hover {
     box-shadow: 0px 0px 2px var(--bw-Black);

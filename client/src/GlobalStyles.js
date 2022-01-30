@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import {createGlobalStyle} from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 :root {
@@ -25,8 +25,6 @@ const GlobalStyle = createGlobalStyle`
 ul {
   list-style: none;
 }
-
-
 `;
 
 export default GlobalStyle;

@@ -10,6 +10,9 @@ import {
   SignMobileBtn,
   HamburgerMenu,
   SectionLink,
+  Lines,
+  BlueLine,
+  RedLine,
 } from "./Navbar.Styled";
 
 const Navbar = () => {
@@ -25,6 +28,10 @@ const Navbar = () => {
           alt="Bennettswood logo"
           onClick={handleMenuItemClick}
         ></Logo>
+        <Lines>
+          <BlueLine />
+          <RedLine />
+        </Lines>
       </LogoBox>
       <NavMenu click={click} onClick={handleMenuItemClick}>
         <SectionLink to="/Joeys" color={"white"} background={"--joeys"}>
@@ -39,7 +46,7 @@ const Navbar = () => {
         <SectionLink to="/Venturers" color={"white"} background={"--venturers"}>
           Venturers
         </SectionLink>
-        <SignMobileBtn color={"white"} background={"--venturers"}>
+        <SignMobileBtn color={"white"} background={"--bw-Blue"}>
           Login / Signup
         </SignMobileBtn>
       </NavMenu>
