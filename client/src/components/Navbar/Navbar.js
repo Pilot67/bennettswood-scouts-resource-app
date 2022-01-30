@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaTimes, FaBars } from "react-icons/fa";
 import menuLogo from "../../images/bennettswood-192x192.png";
+import LoginModal from "../LoginModal";
 import {
   Nav,
   NavMenu,
@@ -17,9 +18,14 @@ import {
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
+  const [login, setLogin] = useState(false);
   const handleHamburgerClick = () => setClick(!click);
   const handleMenuItemClick = () => setClick(false);
 
+  const handleLoginClick = () => {
+    setLogin(!login);
+  };
+  
   return (
     <Nav>
       <LogoBox to="/">
@@ -50,7 +56,10 @@ const Navbar = () => {
           Login / Signup
         </SignMobileBtn>
       </NavMenu>
-      <SignBtn>Login / Signup</SignBtn>
+      <SignBtn onClick={handleLoginClick} >Login / Signup</SignBtn>
+      {login ? <LoginModal handleModalClose={()=>setLogin(!login)}/>: null}
+
+
       <HamburgerMenu onClick={handleHamburgerClick}>
         {click ? <FaTimes /> : <FaBars />}
       </HamburgerMenu>
