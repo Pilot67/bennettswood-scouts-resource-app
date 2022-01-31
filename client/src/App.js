@@ -17,7 +17,7 @@ import Scouts from "./Pages/Scouts";
 import Venturers from "./Pages/Venturers";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:3001/graphql",
+  uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {

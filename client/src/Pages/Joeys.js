@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components"
 import PageContent from "../components/PageContent";
-import img from "../images/scouts-1980.jpg";
+import img from "../images/joeys-1980.jpg";
 
 const Background = styled.div`
   width: 100%;
@@ -23,7 +23,7 @@ const Joeys =() => {
 
     return (
         <Background>
-        <PageContent title={"Scouts"} />
+        <PageContent title={"Joeys"} />
       </Background>
       )
 }

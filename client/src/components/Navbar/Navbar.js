@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaTimes, FaBars } from "react-icons/fa";
 import menuLogo from "../../images/bennettswood-192x192.png";
 import LoginModal from "../LoginModal";
+import Auth from "../../utils/auth";
 import {
   Nav,
   NavMenu,
@@ -20,16 +21,21 @@ const Navbar = () => {
   const [click, setClick] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const handleHamburgerClick = () => setClick(!click);
-  
-const openModal = () => {setShowModal(prev => !prev)}
-  
-  
+
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
+
   const handleMenuItemClick = () => setClick(false);
+
+  const handleSignOut =() => {
+    Auth.logout()
+  }
 
   // const handleLoginClick = () => {
   //   setLogin(!login);
   // };
-  
+
   return (
     <Nav>
       <LogoBox to="/">
@@ -56,15 +62,23 @@ const openModal = () => {setShowModal(prev => !prev)}
         <SectionLink to="/Venturers" color={"white"} background={"--venturers"}>
           Venturers
         </SectionLink>
-        <SignMobileBtn onClick={openModal} color={"white"} background={"--bw-Blue"}>
+        <SignMobileBtn
+          onClick={openModal}
+          color={"white"}
+          background={"--bw-Blue"}
+        >
           Login / Signup
         </SignMobileBtn>
       </NavMenu>
-      <SignBtn onClick={openModal} >Login / Signup</SignBtn>
+      {Auth.loggedIn() ? (
+        <SignBtn onClick={handleSignOut}>Sign Out</SignBtn>
+      ) : (
+        <SignBtn onClick={openModal}>Login / Signup</SignBtn>
+      )}
       <HamburgerMenu onClick={handleHamburgerClick}>
         {click ? <FaTimes /> : <FaBars />}
       </HamburgerMenu>
-      
+
       <LoginModal showModal={showModal} setShowModal={setShowModal} />
     </Nav>
   );

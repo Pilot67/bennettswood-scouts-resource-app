@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components"
 import PageContent from "../components/PageContent";
-import img from "../images/scouts-1980.jpg";
+import img from "../images/cubs-1980.jpg";
 
 const Background = styled.div`
   width: 100%;
   height: 100vh;
   background: url(${img});
   background-repeat: no-repeat;
-  background-position: 50% 100%;
+  background-position: 50% 40%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-background-size: cover;
@@ -17,12 +17,13 @@ const Background = styled.div`
   background-size: cover;
   background-clip: border-box;
   overflow: auto;
+
 `;
 const Cubs =() => {
 
     return (
         <Background>
-        <PageContent title={"Scouts"} />
+        <PageContent title={"Cubs"} />
       </Background>
       )
 }

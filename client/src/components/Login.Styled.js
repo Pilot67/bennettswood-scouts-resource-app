@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const LoginTitle = styled.h1`
+export const Title = styled.h1`
 display: block;
 width: 100%;
 text-align: center;

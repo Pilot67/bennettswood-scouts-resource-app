@@ -5,12 +5,13 @@ import {
   InputField,
   InputLabel,
   LoginForm,
-  LoginTitle,
+  Title,
   SubmitBtn,
 } from "./Login.Styled";
 import Auth from "../utils/auth";
 
-const Login = () => {
+const Login = ({handleSignUp}) => {
+
   const [userFormData, setUserFormData] = useState({
     email: "",
     password: "",
@@ -25,21 +26,19 @@ const Login = () => {
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
     try {
-      console.log(userFormData)
       const  {data}  = await login({
         variables:  userFormData ,
       });
-      console.log(data);
-//      Auth.login(data.login.token);
-
+      console.log(data)
+      Auth.login(data.login.token);
     } catch (error) {
       console.error(error)
     }
 
-    // setUserFormData({
-    //   email: "",
-    //   password: "",
-    // });
+    setUserFormData({
+      email: "",
+      password: "",
+    });
   };
 
 
@@ -47,8 +46,8 @@ const Login = () => {
 
   return (
     <div>
-      <LoginTitle>Login</LoginTitle>
-      <LoginForm>
+      <Title>Login</Title>
+      <LoginForm onSubmit={handleLoginSubmit}>
         <InputLabel htmlFor="email">Email</InputLabel>
         <InputField
           name="email"
@@ -65,8 +64,9 @@ const Login = () => {
           placeholder="Password"
           value={userFormData.password}
         ></InputField>
-        <SubmitBtn onClick={handleLoginSubmit}>Submit</SubmitBtn>
+        <SubmitBtn type="submit">Submit</SubmitBtn>
       </LoginForm>
+        <SubmitBtn onClick={handleSignUp}>Sign Up</SubmitBtn>
     </div>
   );
 };
