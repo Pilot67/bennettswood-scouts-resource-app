@@ -7,7 +7,8 @@ import {
   LoginForm,
   Title,
   SubmitBtn,
-  SignupIn
+  SignupIn,
+  ErrorMessage,
 } from "./Login.Styled";
 import Auth from "../utils/auth";
 
@@ -17,6 +18,9 @@ const Login = ({handleSignUp}) => {
     email: "",
     password: "",
   });
+
+  const errMessage = "err"
+
   const [login, { error, data }] = useMutation(LOGIN_USER);
 
   const handleInputChange = (event) => {
@@ -44,6 +48,7 @@ const Login = ({handleSignUp}) => {
   return (
     <>
       <Title>Login</Title>
+      <ErrorMessage>{errMessage}</ErrorMessage>
       <LoginForm onSubmit={handleLoginSubmit}>
         <InputLabel htmlFor="email">Email</InputLabel>
         <InputField

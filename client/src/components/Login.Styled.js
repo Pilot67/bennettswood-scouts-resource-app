@@ -7,7 +7,18 @@ text-align: center;
 font-size: 3rem;
 color: var(--bw-Black);
 font-weight: bold;
-padding: 2rem;
+padding: 2rem 0 0.5rem 0;
+`
+export const ErrorMessage = styled.h3`
+display: block;
+width: 100%;
+text-align: center;
+height: 1.5rem;
+font-size: 1.5rem;
+color: var(--bw-Red);
+font-weight: bold;
+padding: .5rem;
+
 `
 
 export const LoginForm = styled.form `
