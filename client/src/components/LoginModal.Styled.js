@@ -17,15 +17,15 @@ export const ModalContainer = styled.section`
 export const ModalWrapper = styled.div`
   position: relative;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   min-width: 50vw;
-  min-height: 50vh;
-  background-color: white;
+  background-color: var(--bw-Grey);
   color: black;
   box-shadow: 0 0 20px 1px black;
   padding: 1rem;
-
+  border-radius: 4px;
 `;
 
 export const CloseModalButton = styled(MdClose)`
@@ -39,4 +39,3 @@ export const CloseModalButton = styled(MdClose)`
   color: black;
   z-index: 100;
 `;
-

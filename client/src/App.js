@@ -3,10 +3,10 @@ import GlobalStyle from "./GlobalStyles";
 import { PageContainer } from "./App.Styled";
 import {
   ApolloClient,
-  InMemoryCache,
   ApolloProvider,
+  InMemoryCache,
   createHttpLink,
-} from "@apollo/client/core";
+} from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
@@ -17,7 +17,7 @@ import Scouts from "./Pages/Scouts";
 import Venturers from "./Pages/Venturers";
 
 const httpLink = createHttpLink({
-  uri: "/graphql",
+  uri: "http://localhost:3001/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -30,26 +30,30 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: authLink.concat(httpLink),
 });
 
+
 function App() {
   return (
-    <Router>
-      <GlobalStyle />
-      <PageContainer>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Joeys" element={<Joeys />} />
-          <Route path="/Cubs" element={<Cubs />} />
-          <Route path="/Scouts" element={<Scouts />} />
-          <Route path="/Venturers" element={<Venturers />} />
-        </Routes>
-      </PageContainer>
-    </Router>
+    <ApolloProvider client={client}>
+      <Router>
+        <GlobalStyle />
+        <PageContainer>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Joeys" element={<Joeys />} />
+            <Route path="/Cubs" element={<Cubs />} />
+            <Route path="/Scouts" element={<Scouts />} />
+            <Route path="/Venturers" element={<Venturers />} />
+          </Routes>
+        </PageContainer>
+      </Router>
+    </ApolloProvider>
   );
 }
 

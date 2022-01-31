@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import Login from "./Login"
 import {
   ModalContainer,
   ModalWrapper,
@@ -19,9 +20,8 @@ const LoginModal = ({ showModal, setShowModal }) => {
       {showModal ? (
         <ModalContainer ref={modalRef} onClick={modalCloseBackground}>
           <ModalWrapper>
-            <h1>Login</h1>
-
             <CloseModalButton onClick={() => setShowModal((prev) => !prev)} />
+            <Login />
           </ModalWrapper>
         </ModalContainer>
       ) : null}
