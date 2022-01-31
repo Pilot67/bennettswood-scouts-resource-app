@@ -7,7 +7,7 @@ text-align: center;
 font-size: 3rem;
 color: var(--bw-Black);
 font-weight: bold;
-padding: 1rem;
+padding: 2rem;
 `
 
 export const LoginForm = styled.form `
@@ -49,6 +49,35 @@ cursor: pointer;
   @media screen and (max-width: 1024px) {
     font-size: 1.25rem;
     margin: 1rem 0;
+
+  }
+`
+export const SignupIn = styled.button`
+position: absolute;
+top: 0;
+left: 0px;
+font-size: 1rem;
+padding: .25rem ;
+margin: 1.5rem 1.5rem;
+background-color: transparent;
+color: var(--bw-Blue);
+border: none;
+text-decoration: underline;
+border-bottom: 1px solid var(--bw-Black);
+
+/* border-radius: 1rem; */
+/* box-shadow: 0px 2px 7px var(--bw-Black); */
+align-self: center;
+cursor: pointer;
+  text-decoration: none;
+  transition: all 200ms ease;
+  :hover {
+    /* box-shadow: 0px 0px 2px var(--bw-Black); */
+    transform: translate(-1px, -1px);
+  }
+  @media screen and (max-width: 1024px) {
+    font-size: .75rem;
+    margin: .5rem .5rem;
 
   }
 `

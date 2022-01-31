@@ -28,9 +28,9 @@ const Navbar = () => {
 
   const handleMenuItemClick = () => setClick(false);
 
-  const handleSignOut =() => {
-    Auth.logout()
-  }
+  const handleSignOut = () => {
+    Auth.logout();
+  };
 
   // const handleLoginClick = () => {
   //   setLogin(!login);
@@ -50,25 +50,53 @@ const Navbar = () => {
         </Lines>
       </LogoBox>
       <NavMenu click={click} onClick={handleMenuItemClick}>
-        <SectionLink to="/Joeys" color={"white"} background={"--joeys"}>
-          Joeys
-        </SectionLink>
-        <SectionLink to="/Cubs" color={"black"} background={"--cubs"}>
-          Cubs
-        </SectionLink>
-        <SectionLink to="/Scouts" color={"black"} background={"--scouts"}>
-          Scouts
-        </SectionLink>
-        <SectionLink to="/Venturers" color={"white"} background={"--venturers"}>
-          Venturers
-        </SectionLink>
-        <SignMobileBtn
-          onClick={openModal}
-          color={"white"}
-          background={"--bw-Blue"}
-        >
-          Login / Signup
-        </SignMobileBtn>
+        {Auth.loggedIn() ? (
+          <>
+            <SectionLink to="/Joeys" color={"white"} background={"--bw-Blue"}>
+              Leader Resources
+            </SectionLink>
+            <SectionLink to="/Cubs" color={"white"} background={"--bw-Blue"}>
+              User Account
+            </SectionLink>
+          </>
+        ) : (
+          <>
+            <SectionLink to="/Joeys" color={"white"} background={"--joeys"}>
+              Joeys
+            </SectionLink>
+            <SectionLink to="/Cubs" color={"black"} background={"--cubs"}>
+              Cubs
+            </SectionLink>
+            <SectionLink to="/Scouts" color={"black"} background={"--scouts"}>
+              Scouts
+            </SectionLink>
+            <SectionLink
+              to="/Venturers"
+              color={"white"}
+              background={"--venturers"}
+            >
+              Venturers
+            </SectionLink>
+          </>
+        )}
+
+        {Auth.loggedIn() ? (
+          <SignMobileBtn
+            onClick={handleSignOut}
+            color={"white"}
+            background={"--bw-Blue"}
+          >
+            Sign Out
+          </SignMobileBtn>
+        ) : (
+          <SignMobileBtn
+            onClick={openModal}
+            color={"white"}
+            background={"--bw-Blue"}
+          >
+            Login / Signup
+          </SignMobileBtn>
+        )}
       </NavMenu>
       {Auth.loggedIn() ? (
         <SignBtn onClick={handleSignOut}>Sign Out</SignBtn>

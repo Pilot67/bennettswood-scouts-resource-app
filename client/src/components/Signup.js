@@ -7,10 +7,11 @@ import {
   LoginForm,
   Title,
   SubmitBtn,
+  SignupIn,
 } from "./Login.Styled";
 import Auth from "../utils/auth";
 
-const Signup = () => {
+const Signup = ({handleSignUp}) => {
   const [addUser, { error, data }] = useMutation(ADD_USER);
   const [userFormData, setUserFormData] = useState({
     firstName: "",
@@ -31,8 +32,10 @@ const Signup = () => {
       const { data } = await addUser({
         variables: userFormData,
       });
-      console.log(data);
-      Auth.login(data.login.token);
+      console.log(data)
+
+      Auth.login(data.addUser.token);
+
     } catch (error) {
       console.error(error);
     }
@@ -105,6 +108,7 @@ const Signup = () => {
 
         <SubmitBtn type="submit">Submit</SubmitBtn>
       </LoginForm>
+      <SignupIn onClick={handleSignUp}>Already a member? Sign In</SignupIn>
     </>
   );
 };

@@ -7,6 +7,7 @@ import {
   LoginForm,
   Title,
   SubmitBtn,
+  SignupIn
 } from "./Login.Styled";
 import Auth from "../utils/auth";
 
@@ -29,7 +30,6 @@ const Login = ({handleSignUp}) => {
       const  {data}  = await login({
         variables:  userFormData ,
       });
-      console.log(data)
       Auth.login(data.login.token);
     } catch (error) {
       console.error(error)
@@ -41,11 +41,8 @@ const Login = ({handleSignUp}) => {
     });
   };
 
-
-  
-
   return (
-    <div>
+    <>
       <Title>Login</Title>
       <LoginForm onSubmit={handleLoginSubmit}>
         <InputLabel htmlFor="email">Email</InputLabel>
@@ -66,8 +63,8 @@ const Login = ({handleSignUp}) => {
         ></InputField>
         <SubmitBtn type="submit">Submit</SubmitBtn>
       </LoginForm>
-        <SubmitBtn onClick={handleSignUp}>Sign Up</SubmitBtn>
-    </div>
+        <SignupIn onClick={handleSignUp}>Not a member?</SignupIn>
+    </>
   );
 };
 
