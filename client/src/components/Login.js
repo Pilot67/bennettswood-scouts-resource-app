@@ -12,18 +12,18 @@ import {
 } from "./Login.Styled";
 import Auth from "../utils/auth";
 
-const Login = ({handleSignUp}) => {
-
+const Login = ({ handleSignUp }) => {
   const [userFormData, setUserFormData] = useState({
     email: "",
     password: "",
   });
 
-  const errMessage = "err"
+  const [errMessage, setErrMessage] = useState("");
 
   const [login, { error, data }] = useMutation(LOGIN_USER);
 
   const handleInputChange = (event) => {
+    setErrMessage("");
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
@@ -31,14 +31,19 @@ const Login = ({handleSignUp}) => {
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
     try {
-      const  {data}  = await login({
-        variables:  userFormData ,
+      const { data } = await login({
+        variables: userFormData,
       });
       Auth.login(data.login.token);
     } catch (error) {
-      console.error(error)
+      console.error(error);
+      setErrMessage("Invalid Credentials - Try agian!");
+      clearForm();
     }
+    clearForm();
+  };
 
+  const clearForm = () => {
     setUserFormData({
       email: "",
       password: "",
@@ -68,7 +73,7 @@ const Login = ({handleSignUp}) => {
         ></InputField>
         <SubmitBtn type="submit">Submit</SubmitBtn>
       </LoginForm>
-        <SignupIn onClick={handleSignUp}>Not a member?</SignupIn>
+      <SignupIn onClick={handleSignUp}>Not a member?</SignupIn>
     </>
   );
 };
