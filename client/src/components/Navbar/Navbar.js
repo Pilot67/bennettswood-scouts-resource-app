@@ -52,7 +52,7 @@ const Navbar = () => {
       <NavMenu click={click} onClick={handleMenuItemClick}>
         {Auth.loggedIn() ? (
           <>
-            <SectionLink to="/Joeys" color={"white"} background={"--bw-Blue"}>
+            <SectionLink to="/Resources" color={"white"} background={"--bw-Blue"}>
               Leader Resources
             </SectionLink>
             <SectionLink to="/Cubs" color={"white"} background={"--bw-Blue"}>

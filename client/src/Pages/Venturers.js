@@ -6,10 +6,10 @@ import img from "../images/venturers-1980.jpg";
 
 const Background = styled.div`
   width: 100%;
-  /* height: 100vh; */
+  height: 100vh;
   background: url(${img});
   background-repeat: no-repeat;
-  background-position: 100% 50%;
+  background-position: 50% 65%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-background-size: cover;
