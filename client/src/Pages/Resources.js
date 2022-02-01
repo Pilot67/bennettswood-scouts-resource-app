@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { FormatDate } from "../utils/helpers";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_RESOURCES } from "../utils/queries";
+import { FaEdit, FaTrash, FaComments } from "react-icons/fa";
+
 import Auth from "../utils/Auth.js";
 import {
   Background,
@@ -17,8 +19,9 @@ import {
   Image,
   LinkContainer,
   CommentContainer,
- CommentDescription,
-
+  CommentDescription,
+  ResourcesBtnContainer,
+  ResourcesBtn,
 } from "./Resources.Styled";
 
 const Resources = () => {
@@ -36,6 +39,10 @@ const Resources = () => {
     }
   }
 
+  const handleAddComment = async (id) => {
+    console.log(id);
+  };
+
   return (
     <Background>
       <PageContainer>
@@ -43,6 +50,25 @@ const Resources = () => {
           {userData.map((resource, index) => {
             return (
               <ResourceCard key={index}>
+                <ResourcesBtnContainer>
+                  {Auth.loggedIn ? (
+                    <>
+                      <ResourcesBtn color={"black"} background={"--bw-Red"}>
+                        <FaTrash />
+                      </ResourcesBtn>
+                      <ResourcesBtn color={"white"} background={"--scouts"}>
+                        <FaEdit />
+                      </ResourcesBtn>
+                    </>
+                  ) : null}
+                  <ResourcesBtn
+                    onClick={() => handleAddComment(resource.id)}
+                    color={"white"}
+                    background={"--bw-Blue"}
+                  >
+                    <FaComments />
+                  </ResourcesBtn>
+                </ResourcesBtnContainer>
                 <ResourceTitleContainer>
                   <ResourceTitle>{resource.title}</ResourceTitle>
                   <ResourceTitleInfo>
@@ -82,14 +108,19 @@ const Resources = () => {
                 {resource.resourcescomments.map((comment, index) => {
                   return (
                     <CommentContainer key={index}>
-                      <ResourceTitleContainer >
+                      <ResourceTitleContainer>
                         <ResourceTitleInfo>{comment.title}</ResourceTitleInfo>
                         <ResourceTitleInfo>
-                          Posted by: {comment.user.first_name} {comment.user.last_name}
+                          Posted by: {comment.user.first_name}{" "}
+                          {comment.user.last_name}
                         </ResourceTitleInfo>
-                        <ResourceTitleInfo>{FormatDate(comment.date)}</ResourceTitleInfo>
+                        <ResourceTitleInfo>
+                          {FormatDate(comment.date)}
+                        </ResourceTitleInfo>
                       </ResourceTitleContainer>
-                        <CommentDescription>{comment.description}</CommentDescription>
+                      <CommentDescription>
+                        {comment.description}
+                      </CommentDescription>
                     </CommentContainer>
                   );
                 })}

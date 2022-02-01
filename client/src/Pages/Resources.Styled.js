@@ -30,7 +30,6 @@ export const PageContainer = styled.div`
   @media screen and (max-width: 1024px) {
     width: 100%;
     padding: 5rem 0 80px;
-
   }
 `;
 export const InfoContainer = styled.div`
@@ -46,6 +45,8 @@ export const InfoContainer = styled.div`
   overflow: auto;
 `;
 export const ResourceCard = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
   padding: 1rem;
   margin: 0.5rem 0;
@@ -140,6 +141,36 @@ export const CommentContainer = styled.div`
 `;
 
 export const CommentDescription = styled.p`
-font-style: italic;
-font-size: 1.25rem;
-`
+  font-style: italic;
+  font-size: 1.25rem;
+`;
+
+export const ResourcesBtnContainer = styled.ul`
+  align-self: flex-end;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 5px;
+  list-style: none;
+  text-align: center;
+  justify-content: center;
+`;
+
+export const ResourcesBtn = styled.button`
+  font-size: 1rem;
+  padding: 1px 5px;
+  margin-left: 5px;
+  border-radius: 0.5em;
+  border: none;
+  box-shadow: 0px 1px 2px var(--bw-Grey);
+  background-color: var(${({ background }) => background});
+  color: ${({ color }) => color};
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 200ms ease;
+  :hover {
+    box-shadow: 0px 0px 2px var(--bw-Black);
+  }
+  @media screen and (max-width: 1024px) {
+    font-size: 1rem;
+  }
+`;

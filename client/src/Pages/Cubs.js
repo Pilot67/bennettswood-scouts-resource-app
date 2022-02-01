@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components"
+import styled from "styled-components";
 import PageContent from "../components/PageContent";
 import img from "../images/cubs-1980.jpg";
 
@@ -17,17 +17,14 @@ const Background = styled.div`
   background-size: cover;
   background-clip: border-box;
   overflow: auto;
-
 `;
-const Cubs =() => {
-
-    return (
-        <Background>
-        <PageContent title={"Cubs"} />
-      </Background>
-      )
-}
-
-
+const Cubs = () => {
+  console.log("img", img);
+  return (
+    <Background>
+      <PageContent title={"Cubs"} />
+    </Background>
+  );
+};
 
 export default Cubs;
