@@ -21,23 +21,22 @@ export const PageContainer = styled.div`
   display: flex;
   justify-content: center;
   margin: 0px auto 0px auto;
-  padding: 5rem 0;
+  padding: 5rem 0 120px;
   width: 75vw;
   height: 100%;
   color: #fff;
   text-decoration: none;
   overflow: auto;
-  @media screen and (max-width: 960px) {
+  @media screen and (max-width: 1024px) {
     width: 100%;
-  }
+    padding: 5rem 0 80px;
 
-  @media screen and (max-width: 768px) {
-    width: 100%;
   }
 `;
 export const InfoContainer = styled.div`
   position: relative;
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -138,5 +137,9 @@ export const CommentContainer = styled.div`
   box-shadow: 0 0 2px 1px var(--bw-Grey);
   @media screen and (max-width: 768px) {
   }
+`;
 
+export const CommentDescription = styled.p`
+font-style: italic;
+font-size: 1.25rem;
 `

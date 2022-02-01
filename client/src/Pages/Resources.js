@@ -17,6 +17,8 @@ import {
   Image,
   LinkContainer,
   CommentContainer,
+ CommentDescription,
+
 } from "./Resources.Styled";
 
 const Resources = () => {
@@ -79,15 +81,15 @@ const Resources = () => {
                 </ContentContainer>
                 {resource.resourcescomments.map((comment, index) => {
                   return (
-                    <CommentContainer>
-                      <ResourceTitleContainer key={index}>
+                    <CommentContainer key={index}>
+                      <ResourceTitleContainer >
                         <ResourceTitleInfo>{comment.title}</ResourceTitleInfo>
                         <ResourceTitleInfo>
                           Posted by: {comment.user.first_name} {comment.user.last_name}
                         </ResourceTitleInfo>
+                        <ResourceTitleInfo>{FormatDate(comment.date)}</ResourceTitleInfo>
                       </ResourceTitleContainer>
-                        <p>{FormatDate(comment.date)}</p>
-                        <p>{comment.description}</p>
+                        <CommentDescription>{comment.description}</CommentDescription>
                     </CommentContainer>
                   );
                 })}
