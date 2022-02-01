@@ -51,7 +51,7 @@ const Resources = () => {
             return (
               <ResourceCard key={index}>
                 <ResourcesBtnContainer>
-                  {Auth.loggedIn ? (
+                  {(Auth.getProfile().data.id === resource.user.id) ? (
                     <>
                       <ResourcesBtn color={"black"} background={"--bw-Red"}>
                         <FaTrash />
