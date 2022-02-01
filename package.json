@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
+  "homepage": "https://bennettswood-scouts.herokuapp.com/",
   "engines": {
     "node": "16.11.0"
   },
