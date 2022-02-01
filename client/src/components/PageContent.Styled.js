@@ -7,7 +7,6 @@ export const InfoContainer = styled.div`
   margin: 30px auto 20px auto;
   padding: 5rem 0;
   width: 75vw;
-  /* height: 1200px; */
   color: #fff;
   text-decoration: none;
 `;
