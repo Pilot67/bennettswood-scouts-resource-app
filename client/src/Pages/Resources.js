@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FormatDate } from "../utils/helpers";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_RESOURCES } from "../utils/queries";
-//import Auth from "../utils/auth";
+import Auth from "../utils/Auth.js";
 import { Background, PageContainer, InfoContainer, ResourceCard } from "./Resources.Styled";
 
 const Resources = () => {

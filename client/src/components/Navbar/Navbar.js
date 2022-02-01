@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaTimes, FaBars } from "react-icons/fa";
 import menuLogo from "../../images/bennettswood-192x192.png";
 import LoginModal from "../LoginModal";
-import Auth from "../../utils/auth";
+import Auth from "../../utils/Auth.js";
 import {
   Nav,
   NavMenu,
