@@ -15,6 +15,7 @@ import {
   ImageContainer,
   DescriptionContainer,
   Image,
+  LinkContainer,
 } from "./Resources.Styled";
 
 const Resources = () => {
@@ -62,8 +63,16 @@ const Resources = () => {
                   <ImageContainer>
                     <Image src={resource.image} />
                   </ImageContainer>
-
-                  <p>{resource.link}</p>
+                  <LinkContainer>
+                    <p>Link to the resource:</p>
+                    <a
+                      href={resource.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {resource.link}
+                    </a>
+                  </LinkContainer>
                 </ContentContainer>
                 {resource.resourcescomments.map((comment, index) => {
                   return (
