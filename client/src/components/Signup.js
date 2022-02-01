@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
+import { validateEmail } from "../utils/helpers";
+import Auth from "../utils/auth";
 import {
   InputField,
   InputLabel,
@@ -8,10 +10,11 @@ import {
   Title,
   SubmitBtn,
   SignupIn,
+  ErrorMessage,
 } from "./Login.Styled";
-import Auth from "../utils/auth";
 
-const Signup = ({handleSignUp}) => {
+const Signup = ({ handleSignUp }) => {
+  const [errMessage, setErrMessage] = useState("");
   const [addUser, { error, data }] = useMutation(ADD_USER);
   const [userFormData, setUserFormData] = useState({
     firstName: "",
@@ -24,25 +27,40 @@ const Signup = ({handleSignUp}) => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
+    setErrMessage("");
   };
 
   const handleSignupSubmit = async (event) => {
     event.preventDefault();
+    if (!validateEmail(userFormData.email)) {
+      setErrMessage("Email is invalid");
+      return;
+    }
+    if (userFormData.password.length < 8){
+      setErrMessage("Password is too short")
+      return;
+    }
+    if (!userFormData.firstName || !userFormData.firstName){
+      setErrMessage("First & nast name is required")
+      return;
+    }
+
     try {
       const { data } = await addUser({
         variables: userFormData,
       });
-      console.log(data)
-
       Auth.login(data.addUser.token);
-
     } catch (error) {
-      console.error(error);
+      console.log(error);
+      setErrMessage("Oops, something went wrong Try agian!");
     }
+    clearForm()
+  };
 
+  const clearForm = () => {
     setUserFormData({
-      first_name: "",
-      last_name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
       user_type: "LEADER",
@@ -52,6 +70,7 @@ const Signup = ({handleSignUp}) => {
   return (
     <>
       <Title>Sign Up</Title>
+      <ErrorMessage>{errMessage}</ErrorMessage>
       <LoginForm onSubmit={handleSignupSubmit}>
         <InputLabel htmlFor="firstName">First Name</InputLabel>
         <InputField

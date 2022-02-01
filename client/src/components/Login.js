@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
+import { validateEmail } from "../utils/helpers";
+import Auth from "../utils/auth";
 import {
   InputField,
   InputLabel,
@@ -10,7 +12,6 @@ import {
   SignupIn,
   ErrorMessage,
 } from "./Login.Styled";
-import Auth from "../utils/auth";
 
 const Login = ({ handleSignUp }) => {
   const [userFormData, setUserFormData] = useState({
@@ -30,6 +31,16 @@ const Login = ({ handleSignUp }) => {
 
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
+    if (!validateEmail(userFormData.email)) {
+      setErrMessage("Email is invalid");
+      return;
+    }
+    if (userFormData.password.length < 8){
+      setErrMessage("Password is too short")
+      return;
+    }
+
+
     try {
       const { data } = await login({
         variables: userFormData,
@@ -49,6 +60,10 @@ const Login = ({ handleSignUp }) => {
       password: "",
     });
   };
+
+
+
+
 
   return (
     <>
