@@ -149,7 +149,7 @@ export const ResourcesBtnContainer = styled.ul`
   align-self: flex-end;
   display: grid;
   grid-template-columns: repeat(4, auto);
-  grid-gap: 5px;
+  grid-gap: 10px;
   list-style: none;
   text-align: center;
   justify-content: center;
@@ -157,9 +157,8 @@ export const ResourcesBtnContainer = styled.ul`
 
 export const ResourcesBtn = styled.button`
   font-size: 1rem;
-  padding: 1px 5px;
-  margin-left: 5px;
-  border-radius: 0.5em;
+  padding: 3px 5px;
+  border-radius: 0.4em;
   border: none;
   box-shadow: 0px 1px 2px var(--bw-Grey);
   background-color: var(${({ background }) => background});

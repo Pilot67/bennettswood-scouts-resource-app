@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FormatDate } from "../utils/helpers";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_RESOURCES } from "../utils/queries";
+import { DELETE_RESOURCE } from "../utils/mutations";
 import { FaEdit, FaTrash, FaComments } from "react-icons/fa";
 
 import Auth from "../utils/Auth.js";
@@ -31,6 +32,7 @@ const Resources = () => {
     force: true,
   });
   const userData = data?.resources || [];
+  const [deleteResource, { error }] = useMutation(DELETE_RESOURCE);
 
   if (refetchData) {
     if (refetchData) {
@@ -43,6 +45,16 @@ const Resources = () => {
     console.log(id);
   };
 
+const handleDeleteResource = async (id) =>{
+  try {
+    const { data } = await deleteResource({ variables: { id } });
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+  setRefetchData(true);
+}
+
   return (
     <Background>
       <PageContainer>
@@ -51,9 +63,9 @@ const Resources = () => {
             return (
               <ResourceCard key={index}>
                 <ResourcesBtnContainer>
-                  {(Auth.getProfile().data.id === resource.user.id) ? (
+                  {Auth.getProfile().data.id === resource.user.id ? (
                     <>
-                      <ResourcesBtn color={"black"} background={"--bw-Red"}>
+                      <ResourcesBtn onClick={()=>handleDeleteResource(resource.id)} color={"black"} background={"--bw-Red"}>
                         <FaTrash />
                       </ResourcesBtn>
                       <ResourcesBtn color={"white"} background={"--scouts"}>

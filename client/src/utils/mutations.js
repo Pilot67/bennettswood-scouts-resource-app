@@ -41,3 +41,14 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const DELETE_RESOURCE = gql`
+mutation deleteResource($id: Int!) {
+	deleteResource(id: $id) {
+		resources {
+			id
+		}
+	}
+}
+
+`;
