@@ -48,7 +48,7 @@ const Login = ({ handleSignUp }) => {
       Auth.login(data.login.token);
     } catch (error) {
       console.error(error);
-      setErrMessage("Invalid Credentials - Try agian!");
+      setErrMessage("Invalid Credentials - Try again!");
       clearForm();
     }
     clearForm();

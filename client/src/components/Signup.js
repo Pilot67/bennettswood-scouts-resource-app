@@ -41,7 +41,7 @@ const Signup = ({ handleSignUp }) => {
       return;
     }
     if (!userFormData.firstName || !userFormData.firstName){
-      setErrMessage("First & nast name is required")
+      setErrMessage("First & last name is required")
       return;
     }
 

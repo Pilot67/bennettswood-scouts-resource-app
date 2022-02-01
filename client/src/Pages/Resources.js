@@ -16,6 +16,7 @@ import {
   DescriptionContainer,
   Image,
   LinkContainer,
+  CommentContainer,
 } from "./Resources.Styled";
 
 const Resources = () => {
@@ -43,7 +44,7 @@ const Resources = () => {
                 <ResourceTitleContainer>
                   <ResourceTitle>{resource.title}</ResourceTitle>
                   <ResourceTitleInfo>
-                    Posted By:{resource.user.first_name}{" "}
+                    Posted by:{resource.user.first_name}{" "}
                     {resource.user.last_name}
                   </ResourceTitleInfo>
                 </ResourceTitleContainer>
@@ -63,32 +64,33 @@ const Resources = () => {
                   <ImageContainer>
                     <Image src={resource.image} />
                   </ImageContainer>
-                  <LinkContainer>
-                    <p>Link to the resource:</p>
-                    <a
-                      href={resource.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {resource.link}
-                    </a>
-                  </LinkContainer>
+                  {resource.link.length ? (
+                    <LinkContainer>
+                      <p>Link to the resource:</p>
+                      <a
+                        href={resource.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {resource.link}
+                      </a>
+                    </LinkContainer>
+                  ) : null}
                 </ContentContainer>
                 {resource.resourcescomments.map((comment, index) => {
                   return (
-                    <div key={index}>
-                      <p>{comment.title}</p>
-                      <p>{comment.description}</p>
-                      <p>{FormatDate(comment.date)}</p>
-                      <p>
-                        {comment.user.first_name} {comment.user.last_name}
-                      </p>
-                      <br />
-                    </div>
+                    <CommentContainer>
+                      <ResourceTitleContainer key={index}>
+                        <ResourceTitleInfo>{comment.title}</ResourceTitleInfo>
+                        <ResourceTitleInfo>
+                          Posted by: {comment.user.first_name} {comment.user.last_name}
+                        </ResourceTitleInfo>
+                      </ResourceTitleContainer>
+                        <p>{FormatDate(comment.date)}</p>
+                        <p>{comment.description}</p>
+                    </CommentContainer>
                   );
                 })}
-                <p></p>
-                <br />
               </ResourceCard>
             );
           })}

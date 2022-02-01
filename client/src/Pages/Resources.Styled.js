@@ -128,3 +128,15 @@ export const LinkContainer = styled.div`
     cursor: pointer;
   }
 `;
+
+export const CommentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  color: #ffffff;
+  padding: 0.5rem;
+  box-shadow: 0 0 2px 1px var(--bw-Grey);
+  @media screen and (max-width: 768px) {
+  }
+
+`
