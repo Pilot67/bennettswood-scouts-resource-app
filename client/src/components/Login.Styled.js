@@ -25,7 +25,7 @@ export const LoginForm = styled.form `
 display: flex;
 flex-direction: column;
 align-items: flex-start;
-min-width: 40vw;
+min-width:90%;
 background-color: transparent;
 `;
 
@@ -75,15 +75,11 @@ color: var(--bw-Blue);
 border: none;
 text-decoration: underline;
 border-bottom: 1px solid var(--bw-Black);
-
-/* border-radius: 1rem; */
-/* box-shadow: 0px 2px 7px var(--bw-Black); */
 align-self: center;
 cursor: pointer;
   text-decoration: none;
   transition: all 200ms ease;
   :hover {
-    /* box-shadow: 0px 0px 2px var(--bw-Black); */
     transform: translate(-1px, -1px);
   }
   @media screen and (max-width: 1024px) {

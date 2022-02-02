@@ -2,7 +2,7 @@
   {
     "first_name": "Stuart",
     "last_name": "Simmons",
-    "email": "test@test.com",
+    "email": "stuart@test.com",
     "password": "test1234",
     "user_type": "ADMIN",
     "authorised_user": "true"

@@ -41,7 +41,6 @@ export const InfoContainer = styled.div`
   justify-content: flex-start;
   padding: 0 1rem;
   color: #fff;
-  /* border-top: 1px solid var(--bw-Grey); */
   overflow: auto;
 `;
 export const ResourceCard = styled.div`
@@ -132,7 +131,7 @@ export const LinkContainer = styled.div`
 export const CommentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
+  margin: 5px 0 0 20px;
   color: #ffffff;
   padding: 0.5rem;
   box-shadow: 0 0 2px 1px var(--bw-Grey);
@@ -147,17 +146,16 @@ export const CommentDescription = styled.p`
 
 export const ResourcesBtnContainer = styled.ul`
   align-self: flex-end;
-  display: grid;
-  grid-template-columns: repeat(4, auto);
-  grid-gap: 10px;
+  display: flex;
   list-style: none;
   text-align: center;
-  justify-content: center;
+  justify-content: flex-end;
 `;
 
 export const ResourcesBtn = styled.button`
   font-size: 1rem;
   padding: 3px 5px;
+  margin-left: 10px;
   border-radius: 0.4em;
   border: none;
   box-shadow: 0px 1px 2px var(--bw-Grey);
@@ -173,3 +171,4 @@ export const ResourcesBtn = styled.button`
     font-size: 1rem;
   }
 `;
+

@@ -2,7 +2,7 @@ import React from "react";
 //import { Background } from "./Venturers.Styled";
 import PageContent from "../components/PageContent";
 import styled from "styled-components";
-import img from "../images/venturers-1980.jpg";
+import img from "../images/venturers-1600.jpg";
 
 const Background = styled.div`
   width: 100%;
