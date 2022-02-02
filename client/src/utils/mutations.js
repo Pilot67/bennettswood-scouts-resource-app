@@ -61,3 +61,28 @@ export const DELETE_COMMENT = gql`
     }
   }
 `;
+
+export const ADD_COMMENT = gql`
+  mutation addResourceComment(
+    $resources_id: Int!
+    $title: String!
+    $description: String!
+  ) {
+    addResourceComment(
+      resources_id: $resources_id
+      title: $title
+      description: $description
+    ) {
+      title
+      description
+      user {
+        first_name
+      }
+      resourcescomments {
+        title
+        description
+        date
+      }
+    }
+  }
+`;

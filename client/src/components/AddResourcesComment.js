@@ -1,4 +1,8 @@
 import React, { useState, useRef } from "react";
+import { ADD_COMMENT } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
+
+
 import {
   ModalContainer,
   ModalWrapper,
@@ -14,10 +18,16 @@ import {
   ErrorMessage,
 } from "./Login.Styled";
 
-const AddResourcesComment = ({ id, showModal, setShowModal }) => {
+const AddResourcesComment = ({ id, showModal, setShowModal , setRefetchData}) => {
   const modalRef = useRef();
-  const [userFormData, setUserFormData] = useState({ email: "", password: "" });
+  const [userFormData, setUserFormData] = useState({
+    title: "",
+    description: "",
+  });
   const [errorMessage, setErrMessage] = useState("");
+  const [addResourceComment, { error, data }] = useMutation(ADD_COMMENT);
+
+
 
   const modalCloseBackground = ({ target, currentTarget }) => {
     if (target === currentTarget) {
@@ -27,7 +37,22 @@ const AddResourcesComment = ({ id, showModal, setShowModal }) => {
   const handleCloseModal = () => setShowModal((prev) => !prev);
 
   const errMessage = () => {};
-  const handleCommentSubmit = () => {};
+
+  const handleCommentSubmit = async (event) => {
+    event.preventDefault();
+    console.log(userFormData);
+    try {
+      const { data } = await addResourceComment({
+        variables: {resources_id:id, ...userFormData},
+      });
+    } catch (error) {
+      console.error(error);
+      // clearForm();
+    }
+    setRefetchData(true)
+    setShowModal((prev) => !prev)
+
+  };
 
   const handleInputChange = (event) => {
     setErrMessage("");
@@ -44,21 +69,21 @@ const AddResourcesComment = ({ id, showModal, setShowModal }) => {
             <Title>Add a Comment</Title>
             <ErrorMessage>{errMessage}</ErrorMessage>
             <LoginForm onSubmit={handleCommentSubmit}>
-              <InputLabel htmlFor="email">Email</InputLabel>
+              <InputLabel htmlFor="title">Title</InputLabel>
               <InputField
-                name="email"
+                name="title"
                 onChange={handleInputChange}
                 type="text"
-                placeholder="Email"
-                value={userFormData.email}
+                placeholder="Title"
+                value={userFormData.title}
               ></InputField>
-              <InputLabel htmlFor="password">Password</InputLabel>
+              <InputLabel htmlFor="description">Password</InputLabel>
               <InputField
-                name="password"
+                name="description"
                 onChange={handleInputChange}
                 type="text"
-                placeholder="Password"
-                value={userFormData.password}
+                placeholder="Description"
+                value={userFormData.description}
               ></InputField>
               <SubmitBtn type="submit">Submit</SubmitBtn>
             </LoginForm>

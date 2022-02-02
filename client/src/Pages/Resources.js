@@ -28,7 +28,7 @@ import {
 import { id } from "date-fns/locale";
 
 const Resources = () => {
-  const [refetchData, setRefetchData] = useState(true);
+  const [refetchData, setRefetchData] = useState(false);
   const [showModal, setShowModal] = useState({id:"", show:false, });
   const { loading, data, refetch } = useQuery(GET_RESOURCES, {
     refetchOnMount: "always",
@@ -175,7 +175,7 @@ const Resources = () => {
         </PageContainer>
       </Background>
 
-      <AddResourcesComment id={showModal.id} showModal={showModal.show} setShowModal={setShowModal}/>
+      <AddResourcesComment id={showModal.id} setRefetchData={setRefetchData} showModal={showModal.show} setShowModal={setShowModal}/>
     </>
   );
 };
