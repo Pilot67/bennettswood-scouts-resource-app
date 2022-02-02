@@ -24,10 +24,8 @@ const AddResourcesComment = ({ id, showModal, setShowModal , setRefetchData}) =>
     title: "",
     description: "",
   });
-  const [errorMessage, setErrMessage] = useState("");
+  const [errMessage, setErrMessage] = useState("");
   const [addResourceComment, { error, data }] = useMutation(ADD_COMMENT);
-
-
 
   const modalCloseBackground = ({ target, currentTarget }) => {
     if (target === currentTarget) {
@@ -36,7 +34,7 @@ const AddResourcesComment = ({ id, showModal, setShowModal , setRefetchData}) =>
   };
   const handleCloseModal = () => setShowModal((prev) => !prev);
 
-  const errMessage = () => {};
+  //const errMessage = () => {};
 
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
