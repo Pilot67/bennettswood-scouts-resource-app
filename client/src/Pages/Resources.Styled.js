@@ -48,7 +48,7 @@ export const ResourceCard = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 1rem;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
   box-shadow: 0 0 5px 2px var(--bw-Grey);
 `;
 

@@ -42,7 +42,7 @@ const typeDefs = gql`
 
   type Query {
     users: [User]
-    resources: [Resources]
+    resources(filter:String): [Resources]
     resource(id: Int): Resources
     resourceByUser(user_id: Int): [Resources]
   }
