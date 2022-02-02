@@ -1,13 +1,5 @@
 [
   {
-    "first_name": "Stuart",
-    "last_name": "Simmons",
-    "email": "stuart@test.com",
-    "password": "test1234",
-    "user_type": "ADMIN",
-    "authorised_user": "true"
-  },
-  {
     "first_name": "John",
     "last_name": "Wayne",
     "email": "jw@test.com",
@@ -22,5 +14,13 @@
     "password": "test1234",
     "user_type": "MEMBER",
     "authorised_user": "false"
+  },
+  {
+    "first_name": "Stuart",
+    "last_name": "Simmons",
+    "email": "stuart@test.com",
+    "password": "test1234",
+    "user_type": "ADMIN",
+    "authorised_user": "true"
   }
 ]

@@ -8,6 +8,11 @@ font-size: 3rem;
 color: var(--bw-Black);
 font-weight: bold;
 padding: 2rem 0 0.5rem 0;
+@media screen and (max-width: 1024px) {
+    font-size: 1.75rem;
+
+  }
+
 `
 export const ErrorMessage = styled.h3`
 display: block;
@@ -18,7 +23,11 @@ font-size: 1.5rem;
 color: var(--bw-Red);
 font-weight: bold;
 padding: .5rem;
+@media screen and (max-width: 1024px) {
+    font-size: 1.25rem;
+    height: 1.25rem;
 
+  }
 `
 
 export const LoginForm = styled.form `
@@ -32,6 +41,10 @@ background-color: transparent;
 export const InputLabel = styled.label `
 font-size: 1.25rem;
 margin-top: 1rem;
+@media screen and (max-width: 1024px) {
+    font-size: 1rem;
+  }
+
 `
 export const InputField = styled.input`
 font-size: 1.25rem;
@@ -40,6 +53,22 @@ border: 1px solid var(--bw-Black);
 color: var(--bw-Black);
 padding: 10px;
 width: 100%;
+@media screen and (max-width: 1024px) {
+    font-size: 1rem;
+  }
+
+`
+export const TextField = styled.textarea`
+font-size: 1.25rem;
+border-radius: 4px;
+border: 1px solid var(--bw-Black);
+color: var(--bw-Black);
+padding: 10px;
+width: 100%;
+@media screen and (max-width: 1024px) {
+    font-size: 1rem;
+  }
+
 `
 export const SubmitBtn = styled.button`
 font-size: 1.75rem;
@@ -58,7 +87,7 @@ cursor: pointer;
     box-shadow: 0px 0px 2px var(--bw-Black);
   }
   @media screen and (max-width: 1024px) {
-    font-size: 1.25rem;
+    font-size: 1rem;
     margin: 1rem 0;
 
   }

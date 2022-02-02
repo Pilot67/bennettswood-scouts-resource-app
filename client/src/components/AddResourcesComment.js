@@ -14,7 +14,7 @@ import {
   LoginForm,
   Title,
   SubmitBtn,
-  SignupIn,
+  TextField,
   ErrorMessage,
 } from "./Login.Styled";
 
@@ -75,14 +75,16 @@ const AddResourcesComment = ({ id, showModal, setShowModal , setRefetchData}) =>
                 placeholder="Title"
                 value={userFormData.title}
               ></InputField>
-              <InputLabel htmlFor="description">Password</InputLabel>
-              <InputField
+              <InputLabel htmlFor="description">Description</InputLabel>
+              <TextField
                 name="description"
                 onChange={handleInputChange}
-                type="text"
+                type="textarea"
+                maxLength="1000"
+                rows="4"
                 placeholder="Description"
                 value={userFormData.description}
-              ></InputField>
+              ></TextField>
               <SubmitBtn type="submit">Submit</SubmitBtn>
             </LoginForm>
           </ModalWrapper>
