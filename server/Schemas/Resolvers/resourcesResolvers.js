@@ -13,7 +13,7 @@ const resourcesResolvers = {
         whereClause = filter;
       }
       return await Resources.findAll({
-        order: [['date', 'DESC']],
+        order: [["date", "DESC"]],
         where: {
           section: whereClause,
         },
@@ -92,7 +92,6 @@ const resourcesResolvers = {
       throw new AuthenticationError("You need to be logged in! #2");
     },
     addResource: async (root, args, context) => {
-      console.log(args)
       if (context.user) {
         try {
           const newResource = await Resources.create({
@@ -105,6 +104,27 @@ const resourcesResolvers = {
         }
       }
       throw new AuthenticationError("You need to be logged in! #2");
+    },
+    editResource: async (
+      root,
+      { id, title, description, link, image, section },
+      context
+    ) => {
+      console.log(id, title, description, link, image, section);
+      if (context.user) {
+        try {
+          const editResource = await Resources.update(
+            { title, description, link, image, section },
+            {
+              where: { id },
+              individualHooks: true,
+            }
+          );
+          return;
+        } catch (e) {
+          return e;
+        }
+      }
     },
   },
 };

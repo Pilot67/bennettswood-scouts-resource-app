@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { ADD_RESOURCE } from "../utils/mutations";
+import { ADD_RESOURCE , EDIT_RESOURCE} from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
 import {
@@ -30,6 +30,7 @@ const AddEditResource = ({
   //  console.log(resourceData.title)
   const modalRef = useRef();
   const [addResource, { error, data }] = useMutation(ADD_RESOURCE);
+  const [editResource, { editError, editData }] = useMutation(EDIT_RESOURCE);
 
   const modalCloseBackground = ({ target, currentTarget }) => {
     if (target === currentTarget) {
@@ -51,7 +52,6 @@ const AddEditResource = ({
     if (!resourceData) {
       return;
     }
-    console.log(resourceData);
     setUserFormData({
       id:resourceData.id,
       title: resourceData.title,
@@ -68,6 +68,8 @@ const AddEditResource = ({
       setErrMessage("Title is required");
       return;
     }
+
+    if (userFormData.id === 0 ){
     try {
       const { data } = await addResource({
         variables: { ...userFormData },
@@ -75,6 +77,19 @@ const AddEditResource = ({
     } catch (error) {
       console.error(error);
       clearForm();
+    }
+    } else {
+      console.log("edit selected");
+      try {
+        const { data } = await editResource({
+          variables: { ...userFormData },
+        });
+      } catch (error) {
+        console.error(error);
+        clearForm();
+      }
+  
+
     }
     setRefetchData(true);
     clearForm();

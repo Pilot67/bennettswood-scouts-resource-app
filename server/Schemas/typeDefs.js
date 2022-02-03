@@ -77,6 +77,15 @@ const typeDefs = gql`
       section: String
     ): Resources
 
+    editResource(
+      id: Int!
+      title: String
+      description: String
+      link: String
+      image: String
+      section: String
+    ): Resources
+
     addResourceComment (
       resources_id: Int!
       title: String!

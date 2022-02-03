@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { ADD_COMMENT } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
+import Auth from "../utils/Auth";
 
 import {
   ModalContainer,
@@ -42,6 +43,7 @@ const AddResourcesComment = ({
 
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
+    if (Auth.loggedIn){
     try {
       const { data } = await addResourceComment({
         variables: { resources_id: id, ...userFormData },
@@ -52,6 +54,11 @@ const AddResourcesComment = ({
     }
     setRefetchData(true);
     setShowModal((prev) => !prev);
+    return;
+  }
+    alert("you need to be logged in");
+    setShowModal((prev) => !prev);
+
   };
 
   const clearForm = () => {
