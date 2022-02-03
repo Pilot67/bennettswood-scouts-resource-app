@@ -15,33 +15,44 @@ import {
   SubmitBtn,
   TextField,
   ErrorMessage,
+  Group,
+  RadioButton,
+  RadioContainer,
 } from "./Login.Styled";
 
-const AddResourcesComment = ({
+const AddEditResource = ({
   id,
-  showModal,
-  setShowModal,
+  showModalResource,
+  setShowModalResource,
   setRefetchData,
 }) => {
-  
-  const modalRef = useRef()
-  
-
-
+  const modalRef = useRef();
 
   const modalCloseBackground = ({ target, currentTarget }) => {
     if (target === currentTarget) {
-      setShowModal((prev) => !prev);
+      setShowModalResource((prev) => !prev);
     }
   };
-  const handleCloseModal = () => setShowModal((prev) => !prev);
+  const handleCloseModal = () => setShowModalResource((prev) => !prev);
   const [errMessage, setErrMessage] = useState("");
   const [userFormData, setUserFormData] = useState({
     title: "",
     description: "",
+    link: "",
+    image: "",
+    section: "",
+    userType: "LEADER"
   });
 
-  const handleCommentSubmit = async (event) => {}
+  const handleCommentSubmit = async (event) => {
+      event.preventDefault();
+      
+      console.log(userFormData)
+      clearForm()
+      handleCloseModal()
+
+  };
+
 
   const handleInputChange = (event) => {
     setErrMessage("");
@@ -50,13 +61,26 @@ const AddResourcesComment = ({
   };
 
 
-    return (
+  const clearForm = () => {
+    setUserFormData({
+    title: "",
+    description: "",
+    link: "",
+    image: "",
+    section: "",
+    userType: "LEADER"})
+  }
+  return (
     <>
-      {showModal ? (
+      {showModalResource ? (
         <ModalContainer ref={modalRef} onClick={modalCloseBackground}>
           <ModalWrapper>
             <CloseModalButton onClick={handleCloseModal} />
-            <Title>Add a Comment</Title>
+            {id > 0 ? (
+              <Title>Edit Resource</Title>
+            ) : (
+              <Title>New Resource</Title>
+            )}
             <ErrorMessage>{errMessage}</ErrorMessage>
             <LoginForm onSubmit={handleCommentSubmit}>
               <InputLabel htmlFor="title">Title</InputLabel>
@@ -77,6 +101,45 @@ const AddResourcesComment = ({
                 placeholder="Description"
                 value={userFormData.description}
               ></TextField>
+              <InputLabel htmlFor="link">Link</InputLabel>
+              <InputField
+                name="link"
+                onChange={handleInputChange}
+                type="text"
+                placeholder="html Link"
+                value={userFormData.link}
+              ></InputField>
+              <InputLabel htmlFor="image">Image Link</InputLabel>
+              <InputField
+                name="image"
+                onChange={handleInputChange}
+                type="text"
+                placeholder="html Image"
+                value={userFormData.image}
+              ></InputField>
+              <Group>
+                <RadioContainer>
+                  <RadioButton
+                    value="MEMBER"
+                    id="member"
+                    name="userType"
+                    type="radio"
+                    onChange={ handleInputChange}
+                  />
+                  <label htmlFor="member">Member</label>
+                </RadioContainer>
+                <RadioContainer>
+                  <RadioButton
+                    value="LEADER"
+                    id="leader"
+                    name="userType"
+                    type="radio"
+                    defaultChecked="LEADER"
+                    onChange={ handleInputChange}
+                  />
+                  <label htmlFor="leader">Leader</label>
+                </RadioContainer>
+              </Group>
               <SubmitBtn type="submit">Submit</SubmitBtn>
             </LoginForm>
           </ModalWrapper>
@@ -85,3 +148,4 @@ const AddResourcesComment = ({
     </>
   );
 };
+export default AddEditResource;

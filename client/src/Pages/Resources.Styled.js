@@ -14,6 +14,8 @@ export const Background = styled.div`
   background-size: cover;
   background-clip: border-box;
   overflow: none;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const PageContainer = styled.div`
@@ -21,7 +23,7 @@ export const PageContainer = styled.div`
   display: flex;
   justify-content: center;
   margin: 0px auto 0px auto;
-  padding: 5rem 0 120px;
+  padding: 1rem 0 120px 0;
   width: 75vw;
   height: 100%;
   color: #fff;
@@ -29,7 +31,7 @@ export const PageContainer = styled.div`
   overflow: auto;
   @media screen and (max-width: 1024px) {
     width: 100%;
-    padding: 5rem 0 80px;
+    padding: 1rem 0 80px 0;
   }
 `;
 export const InfoContainer = styled.div`
@@ -172,3 +174,21 @@ export const ResourcesBtn = styled.button`
   }
 `;
 
+export const ResourcesBannerContainer = styled.div`
+  align-content: center;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  text-align: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  margin: 0px auto 0px auto;
+  padding: 0.5rem 0  ;
+  width: 75vw;
+  color: #fff;
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    padding: 0.5rem 0;
+  }
+
+`;

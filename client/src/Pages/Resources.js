@@ -5,6 +5,7 @@ import { GET_RESOURCES } from "../utils/queries";
 import { DELETE_RESOURCE, DELETE_COMMENT } from "../utils/mutations";
 import { FaEdit, FaTrash, FaComments } from "react-icons/fa";
 import AddResourcesComment from "../components/AddResourcesComment";
+import AddEditResource from "../components/AddEditResource";
 
 import Auth from "../utils/Auth.js";
 import {
@@ -24,12 +25,16 @@ import {
   CommentDescription,
   ResourcesBtnContainer,
   ResourcesBtn,
+  ResourcesBannerContainer,
 } from "./Resources.Styled";
-import { id } from "date-fns/locale";
 
 const Resources = () => {
   const [refetchData, setRefetchData] = useState(false);
-  const [showModal, setShowModal] = useState({id:"", show:false, });
+  const [showModal, setShowModal] = useState({ id: "", show: false });
+  const [showModalResource, setShowModalResource] = useState({
+    id: "",
+    show: false,
+  });
   const { loading, data, refetch } = useQuery(GET_RESOURCES, {
     refetchOnMount: "always",
     force: true,
@@ -46,10 +51,15 @@ const Resources = () => {
   }
 
   const openModal = (id) => {
-    console.log(id)
-    //setShowModal({id:id});
-    setShowModal({...showModal, show:!showModal.show, id});
+    setShowModal({ ...showModal, show: !showModal.show, id });
+  };
 
+  const openModalNew = (id) => {
+    setShowModalResource({
+      ...showModalResource,
+      show: !showModalResource.show,
+      id,
+    });
   };
 
   const handleDeleteResource = async (id) => {
@@ -73,6 +83,15 @@ const Resources = () => {
   return (
     <>
       <Background>
+        <ResourcesBannerContainer>
+          <ResourcesBtn
+            onClick={() => openModalNew()}
+            color={"white"}
+            background={"--scouts"}
+          >
+            Create new Post
+          </ResourcesBtn>
+        </ResourcesBannerContainer>
         <PageContainer>
           <InfoContainer>
             {userData.map((resource, index) => {
@@ -175,7 +194,18 @@ const Resources = () => {
         </PageContainer>
       </Background>
 
-      <AddResourcesComment id={showModal.id} setRefetchData={setRefetchData} showModal={showModal.show} setShowModal={setShowModal}/>
+      <AddResourcesComment
+        id={showModal.id}
+        setRefetchData={setRefetchData}
+        showModal={showModal.show}
+        setShowModal={setShowModal}
+      />
+      <AddEditResource
+        id={showModalResource.id}
+        setRefetchData={setRefetchData}
+        showModalResource={showModalResource.show}
+        setShowModalResource={setShowModalResource}
+      />
     </>
   );
 };

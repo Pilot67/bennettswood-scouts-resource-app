@@ -11,6 +11,9 @@ import {
   SubmitBtn,
   SignupIn,
   ErrorMessage,
+  RadioButton,
+  RadioContainer,
+  Group,
 } from "./Login.Styled";
 
 const Signup = ({ handleSignUp }) => {
@@ -36,12 +39,12 @@ const Signup = ({ handleSignUp }) => {
       setErrMessage("Email is invalid");
       return;
     }
-    if (userFormData.password.length < 8){
-      setErrMessage("Password is too short")
+    if (userFormData.password.length < 8) {
+      setErrMessage("Password is too short");
       return;
     }
-    if (!userFormData.firstName || !userFormData.firstName){
-      setErrMessage("First & last name is required")
+    if (!userFormData.firstName || !userFormData.firstName) {
+      setErrMessage("First & last name is required");
       return;
     }
 
@@ -54,7 +57,7 @@ const Signup = ({ handleSignUp }) => {
       console.log(error);
       setErrMessage("Oops, something went wrong Try agian!");
     }
-    clearForm()
+    clearForm();
   };
 
   const clearForm = () => {
@@ -63,7 +66,7 @@ const Signup = ({ handleSignUp }) => {
       lastName: "",
       email: "",
       password: "",
-      user_type: "LEADER",
+      userType: "LEADER",
     });
   };
 
@@ -108,22 +111,29 @@ const Signup = ({ handleSignUp }) => {
           value={userFormData.password}
         ></InputField>
 
-        <label htmlFor="leader">Leader</label>
-        <input
-          type="radio"
-          id="leader"
-          name="userType"
-          value="LEADER"
-          onChange={handleInputChange}
-        />
-        <label htmlFor="member">Member</label>
-        <input
-          type="radio"
-          id="member"
-          name="userType"
-          value="MEMBER"
-          onChange={handleInputChange}
-        />
+        <Group>
+          <RadioContainer>
+            <RadioButton
+              value="MEMBER"
+              id="member"
+              name="userType"
+              type="radio"
+              onChange={handleInputChange}
+            />
+            <label htmlFor="member">Member</label>
+          </RadioContainer>
+          <RadioContainer>
+            <RadioButton
+              value="LEADER"
+              id="leader"
+              name="userType"
+              type="radio"
+              defaultChecked="LEADER"
+              onChange={handleInputChange}
+            />
+            <label htmlFor="leader">Leader</label>
+          </RadioContainer>
+        </Group>
 
         <SubmitBtn type="submit">Submit</SubmitBtn>
       </LoginForm>

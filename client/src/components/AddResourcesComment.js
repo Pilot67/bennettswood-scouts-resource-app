@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import { ADD_COMMENT } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
-
 import {
   ModalContainer,
   ModalWrapper,
@@ -18,7 +17,12 @@ import {
   ErrorMessage,
 } from "./Login.Styled";
 
-const AddResourcesComment = ({ id, showModal, setShowModal , setRefetchData}) => {
+const AddResourcesComment = ({
+  id,
+  showModal,
+  setShowModal,
+  setRefetchData,
+}) => {
   const modalRef = useRef();
   const [userFormData, setUserFormData] = useState({
     title: "",
@@ -38,18 +42,23 @@ const AddResourcesComment = ({ id, showModal, setShowModal , setRefetchData}) =>
 
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
-    console.log(userFormData);
     try {
       const { data } = await addResourceComment({
-        variables: {resources_id:id, ...userFormData},
+        variables: { resources_id: id, ...userFormData },
       });
     } catch (error) {
       console.error(error);
-      // clearForm();
+      clearForm();
     }
-    setRefetchData(true)
-    setShowModal((prev) => !prev)
+    setRefetchData(true);
+    setShowModal((prev) => !prev);
+  };
 
+  const clearForm = () => {
+    setUserFormData({
+      title: "",
+      description: "",
+    });
   };
 
   const handleInputChange = (event) => {
