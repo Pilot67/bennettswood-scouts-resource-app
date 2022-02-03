@@ -32,8 +32,8 @@ const Resources = () => {
   const [refetchData, setRefetchData] = useState(false);
   const [showModal, setShowModal] = useState({ id: "", show: false });
   const [showModalResource, setShowModalResource] = useState({
-    id: "",
     show: false,
+    resourceData:{id:0, title:"", description:"", link:"", image:""},
   });
   const { loading, data, refetch } = useQuery(GET_RESOURCES, {
     refetchOnMount: "always",
@@ -54,13 +54,21 @@ const Resources = () => {
     setShowModal({ ...showModal, show: !showModal.show, id });
   };
 
-  const openModalNew = (id) => {
+  const openModalNew = () => {
     setShowModalResource({
       ...showModalResource,
       show: !showModalResource.show,
-      id,
+      resourceData:{id:0, title:"", description:"", link:"", image:"", section:"GENERAL"}
     });
   };
+
+  const editModal  = ({id, title, description, link, image, section})=>{
+    setShowModalResource({
+      ...showModalResource,
+      show: !showModalResource.show,
+      resourceData:{id, title, description, link, image, section}
+    });
+  }
 
   const handleDeleteResource = async (id) => {
     try {
@@ -107,7 +115,7 @@ const Resources = () => {
                         >
                           <FaTrash />
                         </ResourcesBtn>
-                        <ResourcesBtn color={"white"} background={"--scouts"}>
+                        <ResourcesBtn onClick={()=>editModal(resource)} color={"white"} background={"--scouts"}>
                           <FaEdit />
                         </ResourcesBtn>
                       </>
@@ -205,6 +213,7 @@ const Resources = () => {
         setRefetchData={setRefetchData}
         showModalResource={showModalResource.show}
         setShowModalResource={setShowModalResource}
+        resourceData = {showModalResource.resourceData}
       />
     </>
   );

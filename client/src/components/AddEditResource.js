@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ADD_RESOURCE } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
@@ -21,14 +21,15 @@ import {
 } from "./Login.Styled";
 
 const AddEditResource = ({
-  id,
   showModalResource,
   setShowModalResource,
   setRefetchData,
+  resourceData,
 }) => {
+  // let id = 1;
+  //  console.log(resourceData.title)
   const modalRef = useRef();
   const [addResource, { error, data }] = useMutation(ADD_RESOURCE);
-
 
   const modalCloseBackground = ({ target, currentTarget }) => {
     if (target === currentTarget) {
@@ -38,12 +39,28 @@ const AddEditResource = ({
   const handleCloseModal = () => setShowModalResource((prev) => !prev);
   const [errMessage, setErrMessage] = useState("");
   const [userFormData, setUserFormData] = useState({
+    id: 0,
     title: "",
     description: "",
     link: "",
     image: "",
     section: "GENERAL",
   });
+
+  useEffect(() => {
+    if (!resourceData) {
+      return;
+    }
+    console.log(resourceData);
+    setUserFormData({
+      id:resourceData.id,
+      title: resourceData.title,
+      description: resourceData.description,
+      link: resourceData.link,
+      image: resourceData.image,
+      section: resourceData.section,
+    });
+  }, [resourceData]);
 
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
@@ -63,6 +80,8 @@ const AddEditResource = ({
     clearForm();
     handleCloseModal();
   };
+
+  //setUserFormData({...userFormData, title:"Title Set by Me"})
 
   const handleInputChange = (event) => {
     setErrMessage("");
@@ -85,7 +104,7 @@ const AddEditResource = ({
         <ModalContainer ref={modalRef} onClick={modalCloseBackground}>
           <ModalWrapper>
             <CloseModalButton onClick={handleCloseModal} />
-            {id > 0 ? (
+            {userFormData.id > 0 ? (
               <Title>Edit Resource</Title>
             ) : (
               <Title>New Resource</Title>
