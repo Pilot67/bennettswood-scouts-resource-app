@@ -20,12 +20,17 @@ export const ModalWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  min-width: 50vw;
+  min-width: 60vw;
   background-color: var(--bw-Grey);
   color: black;
   box-shadow: 0 0 20px 1px black;
   padding: 1rem;
   border-radius: 4px;
+  @media screen and (max-width:768px){
+    min-width: 95vw;
+
+    
+  }
 `;
 
 export const CloseModalButton = styled(MdClose)`

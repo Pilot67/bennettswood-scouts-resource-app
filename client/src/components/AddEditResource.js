@@ -47,7 +47,10 @@ const AddEditResource = ({
 
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
-    console.log(userFormData);
+    if (!userFormData.title) {
+      setErrMessage("Title is required");
+      return;
+    }
     try {
       const { data } = await addResource({
         variables: { ...userFormData },

@@ -91,6 +91,7 @@ const resourcesResolvers = {
       throw new AuthenticationError("You need to be logged in! #2");
     },
     addResource: async (root, args, context) => {
+      console.log(args)
       if (context.user) {
         try {
           const newResource = await Resources.create({

@@ -30,22 +30,20 @@ Resources.init(
     },
     link: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: {
-        isURL:true,
       },
     },
     image: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: {
-        isURL:true,
       },
     },
     section: {
       type: DataTypes.STRING(25),
       allowNull: true,
-      defaultValue: "GENERAL"
+      defaultValue: "GENERAL",
     },
     date: {
       type: DataTypes.DATE,
