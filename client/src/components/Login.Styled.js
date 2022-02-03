@@ -133,3 +133,16 @@ export const RadioButton = styled.input`
     font-size: 1rem;
   }
 `;
+
+export const Select = styled.select`
+  font-size: 1.25rem;
+  border-radius: 4px;
+  border: 1px solid var(--bw-Black);
+  color: var(--bw-Black);
+  padding: 0;
+  margin-right: 5px;
+  @media screen and (max-width: 1024px) {
+    font-size: 1rem;
+  }
+
+`

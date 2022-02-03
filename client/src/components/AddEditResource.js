@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { ADD_COMMENT } from "../utils/mutations";
+import { ADD_RESOURCE } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
 import {
@@ -16,8 +16,8 @@ import {
   TextField,
   ErrorMessage,
   Group,
-  RadioButton,
   RadioContainer,
+  Select,
 } from "./Login.Styled";
 
 const AddEditResource = ({
@@ -27,6 +27,8 @@ const AddEditResource = ({
   setRefetchData,
 }) => {
   const modalRef = useRef();
+  const [addResource, { error, data }] = useMutation(ADD_RESOURCE);
+
 
   const modalCloseBackground = ({ target, currentTarget }) => {
     if (target === currentTarget) {
@@ -40,19 +42,24 @@ const AddEditResource = ({
     description: "",
     link: "",
     image: "",
-    section: "",
-    userType: "LEADER"
+    section: "GENERAL",
   });
 
   const handleCommentSubmit = async (event) => {
-      event.preventDefault();
-      
-      console.log(userFormData)
-      clearForm()
-      handleCloseModal()
-
+    event.preventDefault();
+    console.log(userFormData);
+    try {
+      const { data } = await addResource({
+        variables: { ...userFormData },
+      });
+    } catch (error) {
+      console.error(error);
+      clearForm();
+    }
+    setRefetchData(true);
+    clearForm();
+    handleCloseModal();
   };
-
 
   const handleInputChange = (event) => {
     setErrMessage("");
@@ -60,16 +67,15 @@ const AddEditResource = ({
     setUserFormData({ ...userFormData, [name]: value });
   };
 
-
   const clearForm = () => {
     setUserFormData({
-    title: "",
-    description: "",
-    link: "",
-    image: "",
-    section: "",
-    userType: "LEADER"})
-  }
+      title: "",
+      description: "",
+      link: "",
+      image: "",
+      section: "",
+    });
+  };
   return (
     <>
       {showModalResource ? (
@@ -119,25 +125,18 @@ const AddEditResource = ({
               ></InputField>
               <Group>
                 <RadioContainer>
-                  <RadioButton
-                    value="MEMBER"
-                    id="member"
-                    name="userType"
-                    type="radio"
-                    onChange={ handleInputChange}
-                  />
-                  <label htmlFor="member">Member</label>
-                </RadioContainer>
-                <RadioContainer>
-                  <RadioButton
-                    value="LEADER"
-                    id="leader"
-                    name="userType"
-                    type="radio"
-                    defaultChecked="LEADER"
-                    onChange={ handleInputChange}
-                  />
-                  <label htmlFor="leader">Leader</label>
+                  <InputLabel htmlFor="section"> Choose a section: </InputLabel>
+                  <Select
+                    id="section"
+                    name="section"
+                    onChange={handleInputChange}
+                  >
+                    <option value="GENERAL">General</option>
+                    <option value="JOEYS">Joeys</option>
+                    <option value="CUBS">Cubs</option>
+                    <option value="SCOUTS">Scouts</option>
+                    <option value="VENTURERS">Venturers</option>
+                  </Select>
                 </RadioContainer>
               </Group>
               <SubmitBtn type="submit">Submit</SubmitBtn>
