@@ -13,6 +13,7 @@ const resourcesResolvers = {
         whereClause = filter;
       }
       return await Resources.findAll({
+        order: [['date', 'DESC']],
         where: {
           section: whereClause,
         },
