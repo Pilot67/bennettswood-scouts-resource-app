@@ -3,14 +3,18 @@ const {
   UserInputError,
 } = require("apollo-server-express");
 const { User, Resources, ResourcesComments } = require("../../models");
+const { Op } = require("sequelize");
 
 const resourcesResolvers = {
   Query: {
     resources: async (root, { filter }) => {
-      if (filter){
+      let whereClause = { [Op.ne]: null };
+      if (filter) {
+        whereClause = filter;
+      }
       return await Resources.findAll({
         where: {
-          section: filter,
+          section: whereClause,
         },
         include: [
           {
@@ -25,24 +29,7 @@ const resourcesResolvers = {
             ],
           },
         ],
-      })
-    } else {
-      return await Resources.findAll({
-        include: [
-          {
-            model: User,
-          },
-          {
-            model: ResourcesComments,
-            include: [
-              {
-                model: User,
-              },
-            ],
-          },
-        ],
-      })
-    };
+      });
     },
     resource: async (root, { id }, context) => {
       if (context.user) {
