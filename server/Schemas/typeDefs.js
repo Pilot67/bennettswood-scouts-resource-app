@@ -80,7 +80,7 @@ const typeDefs = gql`
       link: String
       image: String
       section: String
-    ): Resources
+    ): Message
 
     editResource(
       id: Int!

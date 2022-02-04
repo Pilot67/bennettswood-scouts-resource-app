@@ -1,4 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { injectStyle } from "react-toastify/dist/inject-style";
 import { ADD_RESOURCE, EDIT_RESOURCE } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
@@ -19,6 +22,12 @@ import {
   RadioContainer,
   Select,
 } from "./Login.Styled";
+
+if (typeof window !== "undefined") {
+  injectStyle();
+}
+
+
 
 const AddEditResource = ({
   showModalResource,
@@ -74,6 +83,18 @@ const AddEditResource = ({
         const { data } = await addResource({
           variables: { ...userFormData },
         });
+        if (data?.addResource.message === "Success") {
+          toast.success('Created Successfully', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover:false,
+            draggable: true,
+            progress: undefined,
+            });
+        }
+
       } catch (error) {
         console.error(error);
         clearForm();
@@ -85,7 +106,15 @@ const AddEditResource = ({
         });
 
         if (data?.editResource.message === "Success") {
-          alert("Success");
+          toast.success('Updated Successfully', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover:false,
+            draggable: true,
+            progress: undefined,
+            });
         }
       } catch (error) {
         console.error(error);
@@ -183,6 +212,7 @@ const AddEditResource = ({
           </ModalWrapper>
         </ModalContainer>
       ) : null}
+      <ToastContainer />
     </>
   );
 };

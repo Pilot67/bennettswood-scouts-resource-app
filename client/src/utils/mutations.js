@@ -102,18 +102,7 @@ export const ADD_RESOURCE = gql`
       image: $image
       section: $section
     ) {
-      id
-      title
-      description
-      link
-      image
-      section
-      date
-      user_id
-      user {
-        first_name
-        last_name
-      }
+      message
     }
   }
 `;

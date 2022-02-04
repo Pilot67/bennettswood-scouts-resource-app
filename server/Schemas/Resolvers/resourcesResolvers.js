@@ -98,7 +98,7 @@ const resourcesResolvers = {
             user_id: context.user.id,
             ...args,
           });
-          return newResource;
+          return {message:"Success"};
         } catch (e) {
           return e;
         }
