@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { ADD_RESOURCE , EDIT_RESOURCE} from "../utils/mutations";
+import { ADD_RESOURCE, EDIT_RESOURCE } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
 import {
@@ -53,7 +53,7 @@ const AddEditResource = ({
       return;
     }
     setUserFormData({
-      id:resourceData.id,
+      id: resourceData.id,
       title: resourceData.title,
       description: resourceData.description,
       link: resourceData.link,
@@ -69,27 +69,29 @@ const AddEditResource = ({
       return;
     }
 
-    if (userFormData.id === 0 ){
-    try {
-      const { data } = await addResource({
-        variables: { ...userFormData },
-      });
-    } catch (error) {
-      console.error(error);
-      clearForm();
-    }
-    } else {
-      console.log("edit selected");
+    if (userFormData.id === 0) {
       try {
-        const { data } = await editResource({
+        const { data } = await addResource({
           variables: { ...userFormData },
         });
       } catch (error) {
         console.error(error);
         clearForm();
       }
-  
+    } else {
+      try {
+        const { data } = await editResource({
+          variables: { ...userFormData },
+        });
 
+        if (data?.editResource.message === "Success") {
+          alert("Success");
+        }
+      } catch (error) {
+        console.error(error);
+        alert("Oops... something went wrong");
+        return;
+      }
     }
     setRefetchData(true);
     clearForm();

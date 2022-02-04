@@ -23,6 +23,11 @@ const typeDefs = gql`
     resourcescomments: [ResourcesComments]
 
   }
+
+  type Message {
+    message: String
+  }
+
   type ResourcesComments {
     id: Int!
     user_id: Int!
@@ -84,7 +89,7 @@ const typeDefs = gql`
       link: String
       image: String
       section: String
-    ): Resources
+    ): Message
 
     addResourceComment (
       resources_id: Int!

@@ -88,64 +88,54 @@ export const ADD_COMMENT = gql`
 `;
 
 export const ADD_RESOURCE = gql`
-mutation addResource(
-	$title: String!
-	$description: String
-	$link: String
-	$image: String
-	$section: String
-) {
-	addResource(
-		title: $title
-		description: $description
-		link: $link
-		image: $image
-		section: $section
-	) {
-		id
-		title
-		description
-		link
-		image
-		section
-		date
-		user_id
-		user {
-			first_name
-			last_name
-		}
-	}
-}
+  mutation addResource(
+    $title: String!
+    $description: String
+    $link: String
+    $image: String
+    $section: String
+  ) {
+    addResource(
+      title: $title
+      description: $description
+      link: $link
+      image: $image
+      section: $section
+    ) {
+      id
+      title
+      description
+      link
+      image
+      section
+      date
+      user_id
+      user {
+        first_name
+        last_name
+      }
+    }
+  }
 `;
 
-export const EDIT_RESOURCE = gql
-`mutation editResource(
-	$id: Int!
-	$title: String
-	$description: String
-	$link: String
-	$image: String
-	$section: String
-) {
-	editResource(
-		id: $id
-		title: $title
-		description: $description
-		link: $link
-		image: $image
-		section: $section
-	) {
-		id
-		title
-		description
-		link
-		image
-		section
-		date
-		user_id
-		user {
-			first_name
-			last_name
-		}
-	}
-}`
+export const EDIT_RESOURCE = gql`
+  mutation editResource(
+    $id: Int!
+    $title: String
+    $description: String
+    $link: String
+    $image: String
+    $section: String
+  ) {
+    editResource(
+      id: $id
+      title: $title
+      description: $description
+      link: $link
+      image: $image
+      section: $section
+    ) {
+      message
+    }
+  }
+`;

@@ -120,7 +120,7 @@ const resourcesResolvers = {
               individualHooks: true,
             }
           );
-          return;
+          return {message:"Success"};
         } catch (e) {
           return e;
         }
