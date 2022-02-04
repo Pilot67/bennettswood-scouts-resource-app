@@ -33,7 +33,7 @@ const Resources = () => {
   const [showModal, setShowModal] = useState({ id: "", show: false });
   const [showModalResource, setShowModalResource] = useState({
     show: false,
-    resourceData:{id:0, title:"", description:"", link:"", image:""},
+    resourceData: { id: 0, title: "", description: "", link: "", image: "" },
   });
   const { loading, data, refetch } = useQuery(GET_RESOURCES, {
     refetchOnMount: "always",
@@ -58,17 +58,24 @@ const Resources = () => {
     setShowModalResource({
       ...showModalResource,
       show: !showModalResource.show,
-      resourceData:{id:0, title:"", description:"", link:"", image:"", section:"GENERAL"}
+      resourceData: {
+        id: 0,
+        title: "",
+        description: "",
+        link: "",
+        image: "",
+        section: "GENERAL",
+      },
     });
   };
 
-  const editModal  = ({id, title, description, link, image, section})=>{
+  const editModal = ({ id, title, description, link, image, section }) => {
     setShowModalResource({
       ...showModalResource,
       show: !showModalResource.show,
-      resourceData:{id, title, description, link, image, section}
+      resourceData: { id, title, description, link, image, section },
     });
-  }
+  };
 
   const handleDeleteResource = async (id) => {
     try {
@@ -106,7 +113,7 @@ const Resources = () => {
               return (
                 <ResourceCard key={index}>
                   <ResourcesBtnContainer>
-                    {Auth.getProfile().data.id === resource.user.id ? (
+                    {Auth.getProfile().data.id === resource.user.id || Auth.getProfile().data.user_type === "ADMIN" ? (
                       <>
                         <ResourcesBtn
                           onClick={() => handleDeleteResource(resource.id)}
@@ -115,7 +122,11 @@ const Resources = () => {
                         >
                           <FaTrash />
                         </ResourcesBtn>
-                        <ResourcesBtn onClick={()=>editModal(resource)} color={"white"} background={"--scouts"}>
+                        <ResourcesBtn
+                          onClick={() => editModal(resource)}
+                          color={"white"}
+                          background={"--scouts"}
+                        >
                           <FaEdit />
                         </ResourcesBtn>
                       </>
@@ -181,7 +192,7 @@ const Resources = () => {
                           {comment.description}
                         </CommentDescription>
 
-                        {Auth.getProfile().data.id === comment.user.id ? (
+                        {Auth.getProfile().data.id === comment.user.id || Auth.getProfile().data.user_type === "ADMIN"? (
                           <ResourcesBtnContainer>
                             <ResourcesBtn
                               onClick={() => handleDeleteComment(comment.id)}
@@ -213,7 +224,7 @@ const Resources = () => {
         setRefetchData={setRefetchData}
         showModalResource={showModalResource.show}
         setShowModalResource={setShowModalResource}
-        resourceData = {showModalResource.resourceData}
+        resourceData={showModalResource.resourceData}
       />
     </>
   );

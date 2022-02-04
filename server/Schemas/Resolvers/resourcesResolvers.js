@@ -114,7 +114,7 @@ const resourcesResolvers = {
       if (context.user) {
         try {
           const editResource = await Resources.update(
-            { title, description, link, image, section },
+            { user_id: context.user.id, title, description, link, image, section },
             {
               where: { id },
               individualHooks: true,
@@ -125,6 +125,7 @@ const resourcesResolvers = {
           return e;
         }
       }
+      throw new AuthenticationError("You need to be logged in! #2");
     },
   },
 };
