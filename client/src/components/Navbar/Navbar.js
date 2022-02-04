@@ -56,7 +56,11 @@ const Navbar = () => {
               >
                 Leader Resources
               </SectionLink>
-              <SectionLink to="/Cubs" color={"white"} background={"--bw-Blue"}>
+              <SectionLink
+                to="/UserAccount"
+                color={"white"}
+                background={"--bw-Blue"}
+              >
                 User Account
               </SectionLink>
             </>

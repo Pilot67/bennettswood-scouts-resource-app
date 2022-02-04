@@ -144,5 +144,4 @@ export const Select = styled.select`
   @media screen and (max-width: 1024px) {
     font-size: 1rem;
   }
-
-`
+`;

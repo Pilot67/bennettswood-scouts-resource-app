@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
 import { injectStyle } from "react-toastify/dist/inject-style";
 import { ADD_RESOURCE, EDIT_RESOURCE } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
@@ -9,7 +8,7 @@ import {
   ModalContainer,
   ModalWrapper,
   CloseModalButton,
-} from "./LoginModal.Styled";
+} from "./Modal.Styled";
 import {
   InputField,
   InputLabel,
@@ -26,8 +25,6 @@ import {
 if (typeof window !== "undefined") {
   injectStyle();
 }
-
-
 
 const AddEditResource = ({
   showModalResource,

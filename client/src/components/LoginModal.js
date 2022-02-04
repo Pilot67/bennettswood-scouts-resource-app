@@ -5,7 +5,7 @@ import {
   ModalContainer,
   ModalWrapper,
   CloseModalButton,
-} from "./LoginModal.Styled";
+} from "./Modal.Styled";
 
 const LoginModal = ({ showModal, setShowModal }) => {
   const [signUp, setSignUp] = useState(false);
@@ -27,8 +27,11 @@ const LoginModal = ({ showModal, setShowModal }) => {
           <ModalWrapper>
             <CloseModalButton onClick={handleCloseModal} />
 
-            {signUp ? <Signup handleSignUp={handleSignUp}/> : <Login handleSignUp={handleSignUp} />}
-            
+            {signUp ? (
+              <Signup handleSignUp={handleSignUp} />
+            ) : (
+              <Login handleSignUp={handleSignUp} />
+            )}
           </ModalWrapper>
         </ModalContainer>
       ) : null}

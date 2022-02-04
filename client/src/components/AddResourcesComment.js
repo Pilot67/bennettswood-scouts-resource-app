@@ -1,4 +1,6 @@
 import React, { useState, useRef } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 import { ADD_COMMENT } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import Auth from "../utils/Auth";
@@ -7,7 +9,7 @@ import {
   ModalContainer,
   ModalWrapper,
   CloseModalButton,
-} from "./LoginModal.Styled";
+} from "./Modal.Styled";
 import {
   InputField,
   InputLabel,
@@ -43,22 +45,30 @@ const AddResourcesComment = ({
 
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
-    if (Auth.loggedIn){
-    try {
-      const { data } = await addResourceComment({
-        variables: { resources_id: id, ...userFormData },
-      });
-    } catch (error) {
-      console.error(error);
-      clearForm();
+    if (Auth.loggedIn) {
+      try {
+        const { data } = await addResourceComment({
+          variables: { resources_id: id, ...userFormData },
+        });
+        toast.success('Added Comment Successfully', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover:false,
+          draggable: true,
+          progress: undefined,
+          });
+      } catch (error) {
+        console.error(error);
+        clearForm();
+      }
+      setRefetchData(true);
+      setShowModal((prev) => !prev);
+      return;
     }
-    setRefetchData(true);
-    setShowModal((prev) => !prev);
-    return;
-  }
     alert("you need to be logged in");
     setShowModal((prev) => !prev);
-
   };
 
   const clearForm = () => {
@@ -106,6 +116,7 @@ const AddResourcesComment = ({
           </ModalWrapper>
         </ModalContainer>
       ) : null}
+      <ToastContainer />
     </>
   );
 };

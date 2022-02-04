@@ -16,6 +16,7 @@ import Cubs from "./Pages/Cubs";
 import Scouts from "./Pages/Scouts";
 import Venturers from "./Pages/Venturers";
 import Resources from "./Pages/Resources";
+import UserAccount from "./Pages/UserAccount"
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -52,6 +53,7 @@ function App() {
             <Route path="/Scouts" element={<Scouts />} />
             <Route path="/Venturers" element={<Venturers />} />
             <Route path="/Resources" element={<Resources />} />
+            <Route path="/UserAccount" element={<UserAccount />} />
           </Routes>
         </PageContainer>
       </Router>
