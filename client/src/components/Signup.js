@@ -106,7 +106,7 @@ const Signup = ({ handleSignUp }) => {
         <InputField
           name="password"
           onChange={handleInputChange}
-          type="text"
+          type="password"
           placeholder="Password"
           value={userFormData.password}
         ></InputField>
