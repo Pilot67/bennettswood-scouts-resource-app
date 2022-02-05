@@ -51,6 +51,7 @@ export const ResourceCard = styled.div`
   width: 100%;
   padding: 1rem;
   margin: 1rem 0;
+  /* background-color: var(--bw-Grey); */
   box-shadow: 0 0 5px 2px var(--bw-Grey);
 `;
 

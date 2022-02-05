@@ -9,8 +9,8 @@ import {
 } from "./Resources.Styled";
 
 const UserAccount = () => {
-    const [showModal, setShowModal] = useState(true);
 
+const userData = Auth.getProfile()
 
 
   return (
@@ -19,7 +19,7 @@ const UserAccount = () => {
         <PageContainer>
           <InfoContainer>
             <ResourceCard>
-                <UserForm />
+                <UserForm userData={userData}/>
             </ResourceCard>
           </InfoContainer>
         </PageContainer>

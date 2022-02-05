@@ -83,7 +83,7 @@ const AddEditResource = ({
         if (data?.addResource.message === "Success") {
           toast.success('Created Successfully', {
             position: "top-center",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover:false,
@@ -105,7 +105,7 @@ const AddEditResource = ({
         if (data?.editResource.message === "Success") {
           toast.success('Updated Successfully', {
             position: "top-center",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover:false,
@@ -196,11 +196,11 @@ const AddEditResource = ({
                     name="section"
                     onChange={handleInputChange}
                   >
-                    <option value="GENERAL">General</option>
-                    <option value="JOEYS">Joeys</option>
-                    <option value="CUBS">Cubs</option>
-                    <option value="SCOUTS">Scouts</option>
-                    <option value="VENTURERS">Venturers</option>
+                    <option value="GENERAL" selected = {userFormData.section === "GENERAL" ? "selected": null}>General</option>
+                    <option value="JOEYS" selected = {userFormData.section === "JOEYS" ? "selected": null}>Joeys</option>
+                    <option value="CUBS" selected = {userFormData.section === "CUBS" ? "selected": null}>Cubs</option>
+                    <option value="SCOUTS" selected = {userFormData.section === "SCOUTS" ? "selected": null}>Scouts</option>
+                    <option value="VENTURERS" selected = {userFormData.section === "VENTURERS" ? "selected": null}>Venturers</option>
                   </Select>
                 </RadioContainer>
               </Group>

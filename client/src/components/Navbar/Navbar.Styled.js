@@ -80,7 +80,7 @@ export const NavMenu = styled.ul`
 export const SignBtn = styled.button`
   font-size: 1.75rem;
   padding: 3px 12px;
-  border-radius: 1em;
+  border-radius: 0.5em;
   border: none;
   box-shadow: 0px 2px 7px var(--bw-Black);
   cursor: pointer;
@@ -101,7 +101,7 @@ export const SignBtn = styled.button`
 export const SectionLink = styled(Link)`
   font-size: 1.75rem;
   padding: 3px 14px;
-  border-radius: 1em;
+  border-radius: 0.5em;
   border: none;
   box-shadow: 0px 2px 7px var(--bw-Black);
   background-color: var(${({ background }) => background});
