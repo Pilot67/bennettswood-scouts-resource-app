@@ -2,6 +2,8 @@ import React from 'react';
 import styled from "styled-components"
 import PageContent from "../components/PageContent";
 import img from "../images/group-1980.jpg";
+import content from "../PageContentText/Home.json"
+
 
 const Background = styled.div`
   width: 100%;
@@ -23,7 +25,7 @@ const Home =() => {
 
     return (
         <Background>
-        <PageContent title={"1st Bennettswood Scouts"} />
+        <PageContent content={content} />
       </Background>
     )
 }

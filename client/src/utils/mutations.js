@@ -42,6 +42,51 @@ export const ADD_USER = gql`
   }
 `;
 
+export const GET_USER = gql`
+mutation user ($id:Int) {
+	user(id:$id) {
+		id
+		email
+		first_name
+		last_name
+		password
+		user_type
+		authorised_user
+	}
+}
+`
+export const UPDATE_USER = gql`
+mutation updateUser(
+	$id: Int!
+	$firstName: String
+	$lastName: String
+	$authorisedUser: Boolean
+	$email: String
+	$userType: String
+) {
+	updateUser(
+		id: $id
+		first_name: $firstName
+		last_name: $lastName
+		email: $email
+		authorised_user: $authorisedUser
+		user_type: $userType
+	) {
+		user {
+			id
+			first_name
+			last_name
+			email
+			password
+			user_type
+			authorised_user
+		}
+	}
+}
+`
+
+
+
 export const DELETE_RESOURCE = gql`
   mutation deleteResource($id: Int!) {
     deleteResource(id: $id) {

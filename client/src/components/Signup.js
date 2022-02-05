@@ -43,7 +43,7 @@ const Signup = ({ handleSignUp }) => {
       setErrMessage("Password is too short");
       return;
     }
-    if (!userFormData.firstName || !userFormData.firstName) {
+    if (!userFormData.firstName || !userFormData.lastName) {
       setErrMessage("First & last name is required");
       return;
     }

@@ -1,6 +1,9 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
+import { useQuery, useMutation } from "@apollo/client";
+import { GET_USER } from "../utils/queries";
+
 import Auth from "../utils/Auth.js";
-import UserForm from "../components/UserForm"
+import UserForm from "../components/UserForm";
 import {
   Background,
   PageContainer,
@@ -9,8 +12,22 @@ import {
 } from "./Resources.Styled";
 
 const UserAccount = () => {
+  const [userData, setUserData] = useState();
+  const { loading, data, refetch } = useQuery(GET_USER, {
+    variables: {id: 2},
+    refetchOnMount: "always",
+    force: true,
+  });
 
-const userData = Auth.getProfile()
+  console.log(data)
+  //const userdata = data?.users || [];
+
+
+  useEffect(() => {
+    // getUserFromDatabase(2)
+
+  }, []);
+
 
 
   return (
@@ -19,7 +36,7 @@ const userData = Auth.getProfile()
         <PageContainer>
           <InfoContainer>
             <ResourceCard>
-                <UserForm userData={userData}/>
+              {userData ? <UserForm userData={userData} /> : "Loading"}
             </ResourceCard>
           </InfoContainer>
         </PageContainer>

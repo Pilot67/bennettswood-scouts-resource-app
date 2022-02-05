@@ -30,3 +30,17 @@ export const GET_RESOURCES = gql`
     }
   }
 `;
+
+export const GET_USER = gql`
+query user($id:Int) {
+	user(id:$id) {
+		id
+		email
+		first_name
+		last_name
+		password
+		user_type
+		authorised_user
+	}
+}
+`;

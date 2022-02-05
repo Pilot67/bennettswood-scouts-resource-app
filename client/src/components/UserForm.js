@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { UPDATE_USER } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
+import { validateEmail } from "../utils/helpers";
+import Auth from "../utils/Auth";
+
 import {
   InputField,
   InputLabel,
@@ -16,11 +21,11 @@ const UserForm = ({ showModal, setShowModal, userData }) => {
   const navigate = useNavigate();
   const [errMessage, setErrMessage] = useState("");
   const [formEdit, setFormEdit] = useState(false);
+  const [updateUser] = useMutation(UPDATE_USER)
   const [userFormData, setUserFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    password: "",
     userType: "LEADER",
   });
 
@@ -43,9 +48,32 @@ const UserForm = ({ showModal, setShowModal, userData }) => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(userFormData);
+    if (!userFormData.firstName || !userFormData.lastName) {
+      setErrMessage("First & last name is required");
+      return;
+    }
+    if (!validateEmail(userFormData.email)) {
+      setErrMessage("Email is invalid");
+      return;
+    }
+
+    try{
+      const {data} = await updateUser({
+        variables: {id:userData.data.id, ...userFormData},
+      })
+      console.log(data)
+      
+      
+
+    }catch (e) {
+      console.error(e.message)
+    }
+
+console.log("navigate")
+
     navigate("/");
   };
+
 
   return (
     <>

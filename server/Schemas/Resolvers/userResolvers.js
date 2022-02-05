@@ -10,8 +10,12 @@ const userResolvers = {
     users: async () => {
       return await User.findAll();
     },
-  },
 
+    user: async (root, { id }, context) => {
+      return await User.findByPk(id)
+    },
+  },
+  
   Mutation: {
     addUser: async (
       root,
@@ -74,13 +78,11 @@ const userResolvers = {
               first_name,
               last_name,
               email,
-              password,
               user_type,
               authorised_user,
             },
             {
               where: { id },
-              individualHooks: true,
             }
           );
           try {

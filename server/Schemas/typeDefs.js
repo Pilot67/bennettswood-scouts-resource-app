@@ -47,6 +47,7 @@ const typeDefs = gql`
 
   type Query {
     users: [User]
+    user (id:Int): User
     resources(filter:String): [Resources]
     resource(id: Int): Resources
     resourceByUser(user_id: Int): [Resources]
@@ -63,9 +64,8 @@ const typeDefs = gql`
     ): Auth
 
     updateUser(
-      id: Int
+      id: Int!
       email: String
-      password: String
       first_name: String
       last_name: String
       user_type: String

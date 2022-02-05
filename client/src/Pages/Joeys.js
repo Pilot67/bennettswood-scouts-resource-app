@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components"
 import PageContent from "../components/PageContent";
 import img from "../images/joeys-1600.jpg";
+import content from "../PageContentText/Joeys.json"
 
 const Background = styled.div`
   width: 100%;
@@ -23,7 +24,7 @@ const Joeys =() => {
 
     return (
         <Background>
-        <PageContent title={"Joeys"} />
+        <PageContent content={content} />
       </Background>
       )
 }
