@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_ALL_USERS } from "../utils/queries";
 import { DELETE_USER , UPDATE_USER} from "../utils/mutations";
+import { useNavigate } from "react-router-dom";
 
 import { FaEdit, FaTrash, FaCheck, FaTimes } from "react-icons/fa";
-
-import NewUserForm from "../components/NewUserForm";
 
 import Auth from "../utils/Auth.js";
 import {
@@ -29,6 +28,7 @@ import {
 } from "./Resources.Styled";
 
 const AllUsers = () => {
+  const navigate = useNavigate();
   const { loading, data, refetch } = useQuery(GET_ALL_USERS, {
     refetchOnMount: "always",
     force: true,
@@ -49,7 +49,9 @@ const AllUsers = () => {
    };
 
   const handleEditUser = (id) => {
-    console.log("Edit User")
+    console.log("Edit User", id)
+    navigate(`/UserAccount/${id}`)
+
   };
 
   

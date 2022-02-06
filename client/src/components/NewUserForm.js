@@ -4,6 +4,7 @@ import { UPDATE_USER } from "../utils/mutations";
 import { GET_USER } from "../utils/queries";
 import { useQuery, useMutation } from "@apollo/client";
 import { validateEmail } from "../utils/helpers";
+import Auth from "../utils/Auth.js";
 
 import {
   InputField,
@@ -18,7 +19,9 @@ import {
 } from "./Login.Styled";
 
 const NewUserForm = ({ getUserId }) => {
+  console.log("from NewUserForm: ", getUserId);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const [errMessage, setErrMessage] = useState("");
   const [formEdit, setFormEdit] = useState(false);
   const [updateUser] = useMutation(UPDATE_USER);
@@ -37,8 +40,18 @@ const NewUserForm = ({ getUserId }) => {
   });
   const userData = data?.user || [];
 
-
-
+  //this loading routing is required for the initial data
+  if (loading && !isLoading) {
+    setIsLoading((prev) => !prev);
+  } else if (!loading && isLoading) {
+    setIsLoading((prev) => !prev);
+    setUserFormData({
+      firstName: userData.first_name,
+      lastName: userData.last_name,
+      email: userData.email,
+      userType: userData.user_type,
+    });
+  }
 
   const handleInputChange = (event) => {
     setFormEdit(true);
@@ -48,6 +61,7 @@ const NewUserForm = ({ getUserId }) => {
   };
 
   useEffect(() => {
+    console.log("Data from useEffect");
     setUserFormData({
       firstName: userData.first_name,
       lastName: userData.last_name,
@@ -55,7 +69,6 @@ const NewUserForm = ({ getUserId }) => {
       userType: userData.user_type,
     });
   }, []);
-
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -72,14 +85,16 @@ const NewUserForm = ({ getUserId }) => {
       const { data } = await updateUser({
         variables: { id: userData.id, ...userFormData },
       });
-      console.log("Data returned from update:", data);
+      //refetch()
     } catch (e) {
       console.error(e.message);
     }
 
-    console.log("navigate");
-
-    navigate("/");
+    if (Auth.getProfile().data.user_type === "ADMIN") {
+      navigate("/AllUsers");
+    } else {
+      navigate("/");
+    }
   };
 
   if (loading) {

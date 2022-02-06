@@ -27,7 +27,6 @@ const Navbar = () => {
   };
 
   const handleMenuItemClick = () => setClick(false);
-
   const handleSignOut = () => {
     Auth.logout();
   };
@@ -56,20 +55,24 @@ const Navbar = () => {
               >
                 Leader Resources
               </SectionLink>
-              <SectionLink
-                to="/UserAccount"
-                color={"white"}
-                background={"--bw-Blue"}
-              >
-                User Account
-              </SectionLink>
-              <SectionLink
-                to="/AllUsers"
-                color={"white"}
-                background={"--bw-Blue"}
-              >
-                All Users
-              </SectionLink>
+
+              {Auth.getProfile().data.user_type === "ADMIN" ? (
+                <SectionLink
+                  to="/AllUsers"
+                  color={"white"}
+                  background={"--bw-Blue"}
+                >
+                  All Users
+                </SectionLink>
+              ) : (
+                <SectionLink
+                  to={`UserAccount/${Auth.getProfile().data.id}`}
+                  color={"white"}
+                  background={"--bw-Blue"}
+                >
+                  User Account
+                </SectionLink>
+              )}
             </>
           ) : (
             <>

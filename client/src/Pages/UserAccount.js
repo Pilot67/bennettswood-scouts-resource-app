@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
 import Auth from "../utils/Auth.js";
 import NewUserForm from "../components/NewUserForm";
@@ -10,16 +11,15 @@ import {
 } from "./Resources.Styled";
 
 const UserAccount = () => {
-
-  const getUserId=Auth.getProfile().data.id
-
+  let { id } = useParams();
+  id = parseInt(id);
   return (
     <>
       <Background>
         <PageContainer>
           <InfoContainer>
             <ResourceCard>
-              <NewUserForm getUserId={getUserId}/>
+              <NewUserForm getUserId={id} />
             </ResourceCard>
           </InfoContainer>
         </PageContainer>

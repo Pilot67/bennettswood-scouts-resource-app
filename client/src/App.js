@@ -54,7 +54,7 @@ function App() {
             <Route path="/Scouts" element={<Scouts />} />
             <Route path="/Venturers" element={<Venturers />} />
             <Route path="/Resources" element={<Resources />} />
-            <Route path="/UserAccount" element={<UserAccount />} />
+            <Route path="/UserAccount/:id" element={<UserAccount />} />
             <Route path="/AllUsers" element={<AllUsers />} />
           </Routes>
         </PageContainer>
