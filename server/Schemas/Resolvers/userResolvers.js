@@ -63,6 +63,7 @@ const userResolvers = {
       },
       context
     ) => {
+      console.log(id,authorised_user)
       if (context.user) {
         if (context.user.user_type === "ADMIN" && !id) {
           id = context.user.id;

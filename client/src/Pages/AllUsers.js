@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_ALL_USERS } from "../utils/queries";
-import { DELETE_USER } from "../utils/mutations";
+import { DELETE_USER , UPDATE_USER} from "../utils/mutations";
 
 import { FaEdit, FaTrash, FaCheck, FaTimes } from "react-icons/fa";
 
@@ -36,21 +36,42 @@ const AllUsers = () => {
   const allUserData = data?.getAllUsers || [];
 
   const [deleteUser] = useMutation(DELETE_USER);
+  const [updateUser] = useMutation(UPDATE_USER);
 
-  const handleDeleteUser = async (id) => {
 
+   const handleDeleteUser = async (id) => {
     try {
       const { data } = await deleteUser({ variables: { id } });
     } catch (error) {
       console.log(error);
     }
      refetch(true);
-  };
-  const handleEditUser = (id) => {};
+   };
 
+  const handleEditUser = (id) => {
+    console.log("Edit User")
+  };
+
+  
+  const handleUpdateAuthorisation = async ({id, authorisedUser}) =>{
+    try {
+      const { data } = await updateUser({
+        variables: { id, authorisedUser },
+      });
+      console.log("Data returned from update:", data);
+    } catch (e) {
+      console.error(e.message);
+    }
+    refetch(true);
+  }
+  
+  
+  
   if (loading) {
     return <>Loading Data.....</>;
   }
+
+
 
   return (
     <>
@@ -69,7 +90,7 @@ const AllUsers = () => {
                       <FaTrash />
                     </ResourcesBtn>
                     <ResourcesBtn
-                      onClick={handleEditUser(userInfo.id)}
+                      onClick={() => handleEditUser(userInfo.id)}
                       color={"white"}
                       background={"--scouts"}
                     >
@@ -93,7 +114,7 @@ const AllUsers = () => {
                       Authorised:
                       {userInfo.authorised_user ? (
                         <ResourcesBtn
-                          onClick={() => handleDeleteUser(userInfo.id)}
+                          onClick={()=>handleUpdateAuthorisation({id:userInfo.id, authorisedUser:false})}
                           color={"black"}
                           background={"--scouts"}
                         >
@@ -101,7 +122,7 @@ const AllUsers = () => {
                         </ResourcesBtn>
                       ) : (
                         <ResourcesBtn
-                          onClick={() => handleDeleteUser(userInfo.id)}
+                          onClick={()=>handleUpdateAuthorisation({id:userInfo.id, authorisedUser:true})}
                           color={"black"}
                           background={"--bw-Red"}
                         >
