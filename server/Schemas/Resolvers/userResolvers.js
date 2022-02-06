@@ -7,7 +7,7 @@ const { signToken } = require("../../utils/auth");
 
 const userResolvers = {
   Query: {
-    users: async () => {
+    getAllUsers: async () => {
       return await User.findAll();
     },
 

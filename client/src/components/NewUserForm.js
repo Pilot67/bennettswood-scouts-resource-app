@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { UPDATE_USER } from "../utils/mutations";
-import { useMutation } from "@apollo/client";
+import { GET_USER } from "../utils/queries";
+import { useQuery, useMutation } from "@apollo/client";
 import { validateEmail } from "../utils/helpers";
-import Auth from "../utils/Auth";
 
 import {
   InputField,
@@ -17,17 +17,28 @@ import {
   Group,
 } from "./Login.Styled";
 
-const UserForm = ({ showModal, setShowModal, userData }) => {
+const NewUserForm = ({ getUserId }) => {
   const navigate = useNavigate();
   const [errMessage, setErrMessage] = useState("");
   const [formEdit, setFormEdit] = useState(false);
-  const [updateUser] = useMutation(UPDATE_USER)
+  const [updateUser] = useMutation(UPDATE_USER);
   const [userFormData, setUserFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     userType: "LEADER",
+    newData: false,
   });
+
+  const { loading, data, refetch } = useQuery(GET_USER, {
+    variables: { id: getUserId },
+    refetchOnMount: "always",
+    force: true,
+  });
+  const userData = data?.user || [];
+
+
+
 
   const handleInputChange = (event) => {
     setFormEdit(true);
@@ -38,13 +49,13 @@ const UserForm = ({ showModal, setShowModal, userData }) => {
 
   useEffect(() => {
     setUserFormData({
-      ...userFormData,
-      firstName: userData.data.first_name,
-      lastName: userData.data.last_name,
-      email: userData.data.email,
-      userType: userData.data.user_type,
+      firstName: userData.first_name,
+      lastName: userData.last_name,
+      email: userData.email,
+      userType: userData.user_type,
     });
   }, []);
+
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -57,23 +68,23 @@ const UserForm = ({ showModal, setShowModal, userData }) => {
       return;
     }
 
-    try{
-      const {data} = await updateUser({
-        variables: {id:userData.data.id, ...userFormData},
-      })
-      console.log(data)
-      
-      
-
-    }catch (e) {
-      console.error(e.message)
+    try {
+      const { data } = await updateUser({
+        variables: { id: userData.id, ...userFormData },
+      });
+      console.log("Data returned from update:", data);
+    } catch (e) {
+      console.error(e.message);
     }
 
-console.log("navigate")
+    console.log("navigate");
 
     navigate("/");
   };
 
+  if (loading) {
+    return <>Loading Data</>;
+  }
 
   return (
     <>
@@ -155,7 +166,7 @@ console.log("navigate")
               onClick={() =>
                 setUserFormData({ ...userFormData, userType: "ADMIN" })
               }
-              disabled={userData.data.user_type === "ADMIN" ? false : true}
+              disabled={userData.user_type === "ADMIN" ? false : true}
             />
             <label htmlFor="admin">Admin</label>
           </RadioContainer>
@@ -171,4 +182,4 @@ console.log("navigate")
   );
 };
 
-export default UserForm;
+export default NewUserForm;

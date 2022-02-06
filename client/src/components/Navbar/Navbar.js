@@ -63,6 +63,13 @@ const Navbar = () => {
               >
                 User Account
               </SectionLink>
+              <SectionLink
+                to="/AllUsers"
+                color={"white"}
+                background={"--bw-Blue"}
+              >
+                All Users
+              </SectionLink>
             </>
           ) : (
             <>

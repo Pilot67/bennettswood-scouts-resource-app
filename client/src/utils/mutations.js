@@ -84,7 +84,15 @@ mutation updateUser(
 	}
 }
 `
-
+export const DELETE_USER = gql`
+mutation deleteUser($id:Int!){
+	deleteUser(id: $id) {
+		user {
+			id
+		}
+	}
+}
+`
 
 
 export const DELETE_RESOURCE = gql`

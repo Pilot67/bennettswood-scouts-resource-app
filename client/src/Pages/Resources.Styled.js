@@ -157,18 +157,18 @@ export const ResourcesBtnContainer = styled.ul`
 
 export const ResourcesBtn = styled.button`
   font-size: 1rem;
-  padding: 3px 5px;
+  padding: 3px 5px 1px 5px;
   margin-left: 10px;
   border-radius: 0.4em;
   border: none;
-  box-shadow: 0px 1px 2px var(--bw-Grey);
+  box-shadow: 0px 0px 2px 1px var(--bw-Grey);
   background-color: var(${({ background }) => background});
   color: ${({ color }) => color};
   cursor: pointer;
   text-decoration: none;
   transition: all 200ms ease;
   :hover {
-    box-shadow: 0px 0px 2px var(--bw-Black);
+    box-shadow: 0px 0px 2px 1px var(--bw-Black);
   }
   @media screen and (max-width: 1024px) {
     font-size: 1rem;

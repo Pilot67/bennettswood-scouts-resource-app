@@ -44,3 +44,17 @@ query user($id:Int) {
 	}
 }
 `;
+
+
+export const GET_ALL_USERS = gql`
+query getAllUsers{
+	getAllUsers {
+		id
+		email
+		first_name
+		last_name
+		user_type
+		authorised_user
+	}
+}
+`

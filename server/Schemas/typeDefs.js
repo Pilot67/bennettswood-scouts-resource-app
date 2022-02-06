@@ -46,7 +46,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    users: [User]
+    getAllUsers: [User]
     user (id:Int): User
     resources(filter:String): [Resources]
     resource(id: Int): Resources
