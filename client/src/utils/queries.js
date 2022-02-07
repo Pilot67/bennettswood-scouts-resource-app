@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_RESOURCES = gql`
-  query resources {
-    resources {
+  query resources ($filter:String){
+    resources (filter:$filter){
       id
       title
       description

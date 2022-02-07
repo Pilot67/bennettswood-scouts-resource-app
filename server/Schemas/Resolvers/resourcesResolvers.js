@@ -8,6 +8,7 @@ const { Op } = require("sequelize");
 const resourcesResolvers = {
   Query: {
     resources: async (root, { filter }) => {
+      console.log(filter);
       let whereClause = { [Op.ne]: null };
       if (filter) {
         whereClause = filter;

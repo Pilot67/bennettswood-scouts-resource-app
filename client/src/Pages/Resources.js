@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FormatDate } from "../utils/helpers";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_RESOURCES } from "../utils/queries";
 import { DELETE_RESOURCE, DELETE_COMMENT } from "../utils/mutations";
 import { FaEdit, FaTrash, FaComments } from "react-icons/fa";
+import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 import AddResourcesComment from "../components/AddResourcesComment";
 import AddEditResource from "../components/AddEditResource";
-
+import ShowComments from "../components/ShowComments";
 import Auth from "../utils/Auth.js";
 import {
   Background,
@@ -27,28 +28,24 @@ import {
   ResourcesBtn,
   ResourcesBannerContainer,
 } from "./Resources.Styled";
+import { Select, InputLabel, RadioContainer } from "../components/Login.Styled";
 
 const Resources = () => {
   const [refetchData, setRefetchData] = useState(false);
+  const [showComments, setShowComments] = useState(false);
   const [showModal, setShowModal] = useState({ id: "", show: false });
   const [showModalResource, setShowModalResource] = useState({
     show: false,
     resourceData: { id: 0, title: "", description: "", link: "", image: "" },
   });
   const { loading, data, refetch } = useQuery(GET_RESOURCES, {
+    variables: { filter: "" },
     refetchOnMount: "always",
     force: true,
   });
   const userData = data?.resources || [];
   const [deleteResource] = useMutation(DELETE_RESOURCE);
   const [deleteResourcesComment] = useMutation(DELETE_COMMENT);
-
-  if (refetchData) {
-    if (refetchData) {
-      setRefetchData((prev) => (prev = !prev));
-      refetch();
-    }
-  }
 
   const openModal = (id) => {
     setShowModal({ ...showModal, show: !showModal.show, id });
@@ -83,16 +80,11 @@ const Resources = () => {
     } catch (error) {
       console.log(error);
     }
-    setRefetchData(true);
+    refetch();
   };
 
-  const handleDeleteComment = async (id) => {
-    try {
-      const { data } = await deleteResourcesComment({ variables: { id } });
-    } catch (error) {
-      console.log(error);
-    }
-    setRefetchData(true);
+  const handleFilterSelect = (event) => {
+    refetch({ filter: event.target.value });
   };
 
   return (
@@ -106,6 +98,17 @@ const Resources = () => {
           >
             Create new Post
           </ResourcesBtn>
+          <RadioContainer>
+            <InputLabel htmlFor="section"> Filter: </InputLabel>
+            <Select name="selection" onChange={handleFilterSelect}>
+              <option value="">All</option>
+              <option value="GENERAL">General</option>
+              <option value="JOEYS">Joeys</option>
+              <option value="CUBS">Cubs</option>
+              <option value="SCOUTS">Scouts</option>
+              <option value="VENTURERS">Venturers</option>
+            </Select>
+          </RadioContainer>
         </ResourcesBannerContainer>
         <PageContainer>
           <InfoContainer>
@@ -113,7 +116,8 @@ const Resources = () => {
               return (
                 <ResourceCard key={index}>
                   <ResourcesBtnContainer>
-                    {Auth.getProfile().data.id === resource.user.id || Auth.getProfile().data.user_type === "ADMIN" ? (
+                    {Auth.getProfile().data.id === resource.user.id ||
+                    Auth.getProfile().data.user_type === "ADMIN" ? (
                       <>
                         <ResourcesBtn
                           onClick={() => handleDeleteResource(resource.id)}
@@ -175,37 +179,25 @@ const Resources = () => {
                       </LinkContainer>
                     ) : null}
                   </ContentContainer>
-                  {resource.resourcescomments.map((comment, index) => {
-                    return (
-                      <CommentContainer key={index}>
-                        <ResourceTitleContainer>
-                          <ResourceTitleInfo>{comment.title}</ResourceTitleInfo>
-                          <ResourceTitleInfo>
-                            Posted by: {comment.user.first_name}{" "}
-                            {comment.user.last_name}
-                          </ResourceTitleInfo>
-                          <ResourceTitleInfo>
-                            {FormatDate(comment.date)}
-                          </ResourceTitleInfo>
-                        </ResourceTitleContainer>
-                        <CommentDescription>
-                          {comment.description}
-                        </CommentDescription>
-
-                        {Auth.getProfile().data.id === comment.user.id || Auth.getProfile().data.user_type === "ADMIN"? (
-                          <ResourcesBtnContainer>
-                            <ResourcesBtn
-                              onClick={() => handleDeleteComment(comment.id)}
-                              color={"black"}
-                              background={"--bw-Red"}
-                            >
-                              <FaTrash />
-                            </ResourcesBtn>
-                          </ResourcesBtnContainer>
-                        ) : null}
-                      </CommentContainer>
-                    );
-                  })}
+                  {showComments ? (
+                    <>
+                      <ResourceTitleInfo
+                        onClick={() => setShowComments(!showComments)}
+                      >
+                        Comments <RiArrowUpSFill />
+                      </ResourceTitleInfo>
+                      <ShowComments
+                        resourcescomments={resource.resourcescomments}
+                        setRefetchData={setRefetchData}
+                      />
+                    </>
+                  ) : (
+                    <ResourceTitleInfo
+                      onClick={() => setShowComments(!showComments)}
+                    >
+                      Comments <RiArrowDownSFill />
+                    </ResourceTitleInfo>
+                  )}
                 </ResourceCard>
               );
             })}

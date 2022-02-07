@@ -85,7 +85,6 @@ const NewUserForm = ({ getUserId }) => {
       const { data } = await updateUser({
         variables: { id: userData.id, ...userFormData },
       });
-      //refetch()
     } catch (e) {
       console.error(e.message);
     }
