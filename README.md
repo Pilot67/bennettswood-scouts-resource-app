@@ -4,7 +4,8 @@
   
 <br>
 
-# Bennettswood Scouts  
+# Bennettswood Scouts Information and Resources  
+![HomePage-640](https://user-images.githubusercontent.com/86697483/152770487-57e4f5d3-a2f0-4d1c-9318-2dfd33284bdf.png)  
 <br>
 
 ## Table of Contents
@@ -62,7 +63,8 @@ No test files yet, check again soon<br>
 <p align="right">(<a href="#top">back to top</a>)</p>
   
 ## Links
-Published Link: https://bennettswood-scouts.herokuapp.com/<br>
+Published Link: https://bennettswood-scouts.herokuapp.com/  
+Github Repo: https://github.com/Pilot67/bennettswood-scouts-resource-app/  
 <p align="right">(<a href="#top">back to top</a>)</p>
   
 ## Questions
