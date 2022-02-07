@@ -5,6 +5,7 @@ import { GET_RESOURCES } from "../utils/queries";
 import { DELETE_RESOURCE, DELETE_COMMENT } from "../utils/mutations";
 import { FaEdit, FaTrash, FaComments } from "react-icons/fa";
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
+
 import AddResourcesComment from "../components/AddResourcesComment";
 import AddEditResource from "../components/AddEditResource";
 import ShowComments from "../components/ShowComments";
@@ -32,7 +33,7 @@ import { Select, InputLabel, RadioContainer } from "../components/Login.Styled";
 
 const Resources = () => {
   const [refetchData, setRefetchData] = useState(false);
-  const [showComments, setShowComments] = useState(false);
+  const [showComments, setShowComments] = useState({show:false, id:0});
   const [showModal, setShowModal] = useState({ id: "", show: false });
   const [showModalResource, setShowModalResource] = useState({
     show: false,
@@ -87,6 +88,10 @@ const Resources = () => {
     refetch({ filter: event.target.value });
   };
 
+  const handleCommentShow = (id) => {
+    setShowComments({show:true,id})
+    console.log(id, "clicked");
+  };
   return (
     <>
       <Background>
@@ -179,21 +184,24 @@ const Resources = () => {
                       </LinkContainer>
                     ) : null}
                   </ContentContainer>
-                  {showComments ? (
+
+
+                  {showComments.show && resource.id === showComments.id? (
                     <>
                       <ResourceTitleInfo
-                        onClick={() => setShowComments(!showComments)}
+                        onClick={() => setShowComments({show:false})}
                       >
                         Comments <RiArrowUpSFill />
                       </ResourceTitleInfo>
-                      <ShowComments
-                        resourcescomments={resource.resourcescomments}
-                        setRefetchData={setRefetchData}
-                      />
+                      {resource.resourcescomments.map((commentData) => {
+                          return(
+                            <ShowComments key = {commentData.id} comment= {commentData} setRefetchData={()=>refetch()}/>
+                          )
+                      })}
                     </>
                   ) : (
                     <ResourceTitleInfo
-                      onClick={() => setShowComments(!showComments)}
+                      onClick={() => handleCommentShow(resource.id)}
                     >
                       Comments <RiArrowDownSFill />
                     </ResourceTitleInfo>
@@ -207,13 +215,13 @@ const Resources = () => {
 
       <AddResourcesComment
         id={showModal.id}
-        setRefetchData={setRefetchData}
+        setRefetchData={() => refetch()}
         showModal={showModal.show}
         setShowModal={setShowModal}
       />
       <AddEditResource
         id={showModalResource.id}
-        setRefetchData={setRefetchData}
+        setRefetchData={() => refetch()}
         showModalResource={showModalResource.show}
         setShowModalResource={setShowModalResource}
         resourceData={showModalResource.resourceData}
