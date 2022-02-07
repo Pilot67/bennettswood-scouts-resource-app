@@ -140,7 +140,7 @@ export const LinkContainer = styled.div`
 export const CommentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 5px 0 0 20px;
+  margin: 5px 20px 0 20px;
   color: #ffffff;
   padding: 0.5rem;
   box-shadow: 0 0 2px 1px var(--bw-Grey);

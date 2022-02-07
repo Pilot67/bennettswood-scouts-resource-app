@@ -30,11 +30,14 @@ const ShowComments = ({ comment, setRefetchData, id }) => {
       <CommentContainer key={id}>
         <ResourceTitleContainer>
           <ResourceTitleInfo>{comment.title}</ResourceTitleInfo>
+          <ResourceTitleInfo>{FormatDate(comment.date)}</ResourceTitleInfo>
+        </ResourceTitleContainer>
+        <ResourceTitleContainer>
           <ResourceTitleInfo>
             Posted by: {comment.user.first_name} {comment.user.last_name}
           </ResourceTitleInfo>
-          <ResourceTitleInfo>{FormatDate(comment.date)}</ResourceTitleInfo>
         </ResourceTitleContainer>
+
         <CommentDescription>{comment.description}</CommentDescription>
 
         {Auth.getProfile().data.id === comment.user.id ||

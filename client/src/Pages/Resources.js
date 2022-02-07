@@ -211,6 +211,7 @@ const Resources = () => {
                         <>
                           <ResourceTitleInfo
                             onClick={() => setShowComments({ show: false })}
+                            style={{cursor:"pointer"}}
                           >
                             Comments <RiArrowUpSFill />
                           </ResourceTitleInfo>
@@ -227,6 +228,7 @@ const Resources = () => {
                       ) : (
                         <ResourceTitleInfo
                           onClick={() => handleCommentShow(resource.id)}
+                          style={{cursor:"pointer"}}
                         >
                           Comments <RiArrowDownSFill />
                         </ResourceTitleInfo>
