@@ -35,10 +35,28 @@ you will need to run ```npm install``` from the base folder. This will install a
   
 ## Usage
 You can click on the menu items to review information about group sections.  
+![HomePage-640](https://user-images.githubusercontent.com/86697483/152770913-4b739e24-0d10-415d-b32f-2fca42683f22.png)  
+  
 Login to see the leader resources... If you dont have a login you can signup (there is a link on the login form)  
+![Login-640](https://user-images.githubusercontent.com/86697483/152770963-d779fdb9-7099-446a-85ff-f9a7923cf609.png)  
+  
+![NewUser-640](https://user-images.githubusercontent.com/86697483/152771114-e806bcca-ad89-41a2-a463-c4738981079c.png)  
+
 An administrator will need to authorise your use on the site.  
-As a user, you can create new resources, add comments, edit your own posts and delete your comments. You can also edit your user credentials.  
+As a user, you can view, create new resources, add comments, edit your own posts and delete your comments. You can also edit your user credentials.  
+![posts-640](https://user-images.githubusercontent.com/86697483/152771294-449c49fd-4b4c-40da-88dc-1fcb5809fe5c.png)  
+  
+![newPost-640](https://user-images.githubusercontent.com/86697483/152771054-698205e7-929b-4b42-b97c-043d52062c97.png)  
+  
+![comments-640](https://user-images.githubusercontent.com/86697483/152771350-a45ab4a8-b917-4107-a2d1-57ba9d684908.png)  
+  
+![AddComment-640](https://user-images.githubusercontent.com/86697483/152771395-c9a9ef9f-5481-44bc-b5ca-aeb098a2c73f.png)  
+  
 As an administrator, you can edit and delete all posts and comments. You can also edit and delete users along with authorising new users.  
+![AllUser-640](https://user-images.githubusercontent.com/86697483/152771478-2247591b-75e9-46bf-a048-f2cb8ee63622.png)  
+  
+![editUser-640](https://user-images.githubusercontent.com/86697483/152771441-fb97302f-6fed-4ec2-871f-5ec327a05824.png)  
+  
 <br>
 <p align="right">(<a href="#top">back to top</a>)</p>
   
