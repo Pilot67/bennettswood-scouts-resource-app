@@ -89,7 +89,6 @@ const Resources = () => {
 
   const handleCommentShow = (id) => {
     setShowComments({ show: true, id });
-    console.log(id, "clicked");
   };
 
   if (loading) {
