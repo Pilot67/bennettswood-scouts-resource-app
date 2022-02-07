@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FormatDate } from "../utils/helpers";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_RESOURCES } from "../utils/queries";
-import { DELETE_RESOURCE, DELETE_COMMENT } from "../utils/mutations";
+import { DELETE_RESOURCE } from "../utils/mutations";
 import { FaEdit, FaTrash, FaComments } from "react-icons/fa";
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 
@@ -23,8 +23,6 @@ import {
   DescriptionContainer,
   Image,
   LinkContainer,
-  CommentContainer,
-  CommentDescription,
   ResourcesBtnContainer,
   ResourcesBtn,
   ResourcesBannerContainer,
@@ -32,8 +30,8 @@ import {
 import { Select, InputLabel, RadioContainer } from "../components/Login.Styled";
 
 const Resources = () => {
-  const [refetchData, setRefetchData] = useState(false);
-  const [showComments, setShowComments] = useState({show:false, id:0});
+  const [selectedOption, setSelectedOption] = useState("");
+  const [showComments, setShowComments] = useState({ show: false, id: 0 });
   const [showModal, setShowModal] = useState({ id: "", show: false });
   const [showModalResource, setShowModalResource] = useState({
     show: false,
@@ -42,11 +40,11 @@ const Resources = () => {
   const { loading, data, refetch } = useQuery(GET_RESOURCES, {
     variables: { filter: "" },
     refetchOnMount: "always",
+    notifyOnNetworkStatusChange: true,
     force: true,
   });
   const userData = data?.resources || [];
   const [deleteResource] = useMutation(DELETE_RESOURCE);
-  const [deleteResourcesComment] = useMutation(DELETE_COMMENT);
 
   const openModal = (id) => {
     setShowModal({ ...showModal, show: !showModal.show, id });
@@ -85,13 +83,31 @@ const Resources = () => {
   };
 
   const handleFilterSelect = (event) => {
+    setSelectedOption(event.target.value);
     refetch({ filter: event.target.value });
   };
 
   const handleCommentShow = (id) => {
-    setShowComments({show:true,id})
+    setShowComments({ show: true, id });
     console.log(id, "clicked");
   };
+
+  if (loading) {
+    return (
+      <Background>
+        <ResourcesBannerContainer>
+          <PageContainer>
+            <InfoContainer>
+              <ResourceTitleContainer>
+                <ResourceTitle>Loading....</ResourceTitle>
+              </ResourceTitleContainer>
+            </InfoContainer>
+          </PageContainer>
+        </ResourcesBannerContainer>
+      </Background>
+    );
+  }
+
   return (
     <>
       <Background>
@@ -105,7 +121,11 @@ const Resources = () => {
           </ResourcesBtn>
           <RadioContainer>
             <InputLabel htmlFor="section"> Filter: </InputLabel>
-            <Select name="selection" onChange={handleFilterSelect}>
+            <Select
+              name="selection"
+              onChange={handleFilterSelect}
+              value={selectedOption}
+            >
               <option value="">All</option>
               <option value="GENERAL">General</option>
               <option value="JOEYS">Joeys</option>
@@ -117,98 +137,107 @@ const Resources = () => {
         </ResourcesBannerContainer>
         <PageContainer>
           <InfoContainer>
-            {userData.map((resource, index) => {
-              return (
-                <ResourceCard key={index}>
-                  <ResourcesBtnContainer>
-                    {Auth.getProfile().data.id === resource.user.id ||
-                    Auth.getProfile().data.user_type === "ADMIN" ? (
-                      <>
+            {userData.length > 0 ? (
+              <>
+                {userData.map((resource, index) => {
+                  return (
+                    <ResourceCard key={index}>
+                      <ResourcesBtnContainer>
+                        {Auth.getProfile().data.id === resource.user.id ||
+                        Auth.getProfile().data.user_type === "ADMIN" ? (
+                          <>
+                            <ResourcesBtn
+                              onClick={() => handleDeleteResource(resource.id)}
+                              color={"black"}
+                              background={"--bw-Red"}
+                            >
+                              <FaTrash />
+                            </ResourcesBtn>
+                            <ResourcesBtn
+                              onClick={() => editModal(resource)}
+                              color={"white"}
+                              background={"--scouts"}
+                            >
+                              <FaEdit />
+                            </ResourcesBtn>
+                          </>
+                        ) : null}
                         <ResourcesBtn
-                          onClick={() => handleDeleteResource(resource.id)}
-                          color={"black"}
-                          background={"--bw-Red"}
-                        >
-                          <FaTrash />
-                        </ResourcesBtn>
-                        <ResourcesBtn
-                          onClick={() => editModal(resource)}
+                          onClick={() => openModal(resource.id)}
                           color={"white"}
-                          background={"--scouts"}
+                          background={"--bw-Blue"}
                         >
-                          <FaEdit />
+                          <FaComments />
                         </ResourcesBtn>
-                      </>
-                    ) : null}
-                    <ResourcesBtn
-                      onClick={() => openModal(resource.id)}
-                      color={"white"}
-                      background={"--bw-Blue"}
-                    >
-                      <FaComments />
-                    </ResourcesBtn>
-                  </ResourcesBtnContainer>
-                  <ResourceTitleContainer>
-                    <ResourceTitle>{resource.title}</ResourceTitle>
-                    <ResourceTitleInfo>
-                      Posted by:{resource.user.first_name}{" "}
-                      {resource.user.last_name}
-                    </ResourceTitleInfo>
-                  </ResourceTitleContainer>
-                  <ResourceTitleContainer>
-                    <ResourceTitleInfo>
-                      Posted on {FormatDate(resource.date)}
-                    </ResourceTitleInfo>
-                    <ResourceTitleInfo>
-                      Section: {resource.section}
-                    </ResourceTitleInfo>
-                  </ResourceTitleContainer>
-                  <ContentContainer>
-                    <DescriptionContainer>
-                      <p>{resource.description}</p>
-                    </DescriptionContainer>
+                      </ResourcesBtnContainer>
+                      <ResourceTitleContainer>
+                        <ResourceTitle>{resource.title}</ResourceTitle>
+                        <ResourceTitleInfo>
+                          Posted by:{resource.user.first_name}{" "}
+                          {resource.user.last_name}
+                        </ResourceTitleInfo>
+                      </ResourceTitleContainer>
+                      <ResourceTitleContainer>
+                        <ResourceTitleInfo>
+                          Posted on {FormatDate(resource.date)}
+                        </ResourceTitleInfo>
+                        <ResourceTitleInfo>
+                          Section: {resource.section}
+                        </ResourceTitleInfo>
+                      </ResourceTitleContainer>
+                      <ContentContainer>
+                        <DescriptionContainer>
+                          <p>{resource.description}</p>
+                        </DescriptionContainer>
 
-                    <ImageContainer>
-                      <Image src={resource.image} />
-                    </ImageContainer>
-                    {resource.link.length ? (
-                      <LinkContainer>
-                        <p>Link to the resource:</p>
-                        <a
-                          href={resource.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <ImageContainer>
+                          <Image src={resource.image} />
+                        </ImageContainer>
+                        {resource.link.length ? (
+                          <LinkContainer>
+                            <p>Link to the resource:</p>
+                            <a
+                              href={resource.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {resource.link}
+                            </a>
+                          </LinkContainer>
+                        ) : null}
+                      </ContentContainer>
+
+                      {showComments.show && resource.id === showComments.id ? (
+                        <>
+                          <ResourceTitleInfo
+                            onClick={() => setShowComments({ show: false })}
+                          >
+                            Comments <RiArrowUpSFill />
+                          </ResourceTitleInfo>
+                          {resource.resourcescomments.map((commentData) => {
+                            return (
+                              <ShowComments
+                                key={commentData.id}
+                                comment={commentData}
+                                setRefetchData={() => refetch()}
+                              />
+                            );
+                          })}
+                        </>
+                      ) : (
+                        <ResourceTitleInfo
+                          onClick={() => handleCommentShow(resource.id)}
                         >
-                          {resource.link}
-                        </a>
-                      </LinkContainer>
-                    ) : null}
-                  </ContentContainer>
-
-
-                  {showComments.show && resource.id === showComments.id? (
-                    <>
-                      <ResourceTitleInfo
-                        onClick={() => setShowComments({show:false})}
-                      >
-                        Comments <RiArrowUpSFill />
-                      </ResourceTitleInfo>
-                      {resource.resourcescomments.map((commentData) => {
-                          return(
-                            <ShowComments key = {commentData.id} comment= {commentData} setRefetchData={()=>refetch()}/>
-                          )
-                      })}
-                    </>
-                  ) : (
-                    <ResourceTitleInfo
-                      onClick={() => handleCommentShow(resource.id)}
-                    >
-                      Comments <RiArrowDownSFill />
-                    </ResourceTitleInfo>
-                  )}
-                </ResourceCard>
-              );
-            })}
+                          Comments <RiArrowDownSFill />
+                        </ResourceTitleInfo>
+                      )}
+                    </ResourceCard>
+                  );
+                })}
+              </>
+            ) : (
+              <h3>Nothing to display..</h3>
+            )}
           </InfoContainer>
         </PageContainer>
       </Background>

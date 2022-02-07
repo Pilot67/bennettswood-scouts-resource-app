@@ -1,9 +1,8 @@
-import React from 'react';
-import styled from "styled-components"
+import React from "react";
+import styled from "styled-components";
 import PageContent from "../components/PageContent";
 import img from "../images/group-1980.jpg";
-import content from "../PageContentText/Home.json"
-
+import content from "../PageContentText/Home.json";
 
 const Background = styled.div`
   width: 100%;
@@ -19,17 +18,13 @@ const Background = styled.div`
   background-size: cover;
   background-clip: border-box;
   overflow: auto;
-
 `;
-const Home =() => {
-
-    return (
-        <Background>
-        <PageContent content={content} />
-      </Background>
-    )
-}
-
-
+const Home = () => {
+  return (
+    <Background>
+      <PageContent content={content} />
+    </Background>
+  );
+};
 
 export default Home;

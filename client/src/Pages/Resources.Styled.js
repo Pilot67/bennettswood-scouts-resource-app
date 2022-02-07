@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import img from "../images/scouts-1980.jpg";
+import img from "../images/compass-1600.jpg";
 
 export const Background = styled.div`
   width: 100%;
   height: 100vh;
   background-repeat: no-repeat;
   background-position: 50% 100%;
+  background: url(${img});
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-background-size: cover;
@@ -16,16 +17,18 @@ export const Background = styled.div`
   overflow: none;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  opacity: 1;
 `;
 
 export const PageContainer = styled.div`
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(55, 55, 55, 0.9);
   display: flex;
   justify-content: center;
   margin: 0px auto 0px auto;
   padding: 1rem 0 120px 0;
   width: 75vw;
-  height: 100%;
+  /* height: 100%; */
   color: #fff;
   text-decoration: none;
   overflow: auto;
@@ -45,6 +48,9 @@ export const InfoContainer = styled.div`
   color: #fff;
   overflow: auto;
 `;
+
+
+
 export const ResourceCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -184,12 +190,11 @@ export const ResourcesBannerContainer = styled.div`
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.7);
   margin: 0px auto 0px auto;
-  padding: 0.5rem 0  ;
+  padding: 0.5rem 0;
   width: 75vw;
   color: #fff;
   @media screen and (max-width: 1024px) {
     width: 100%;
     padding: 0.5rem 0;
   }
-
 `;

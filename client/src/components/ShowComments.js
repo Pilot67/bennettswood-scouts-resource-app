@@ -4,8 +4,6 @@ import { useMutation } from "@apollo/client";
 import { DELETE_COMMENT } from "../utils/mutations";
 import { FaTrash } from "react-icons/fa";
 import Auth from "../utils/Auth.js";
-import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
-
 
 import {
   ResourceTitleContainer,

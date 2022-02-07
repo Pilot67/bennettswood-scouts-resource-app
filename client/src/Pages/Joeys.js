@@ -1,8 +1,8 @@
 import React from "react";
-import styled from "styled-components"
+import styled from "styled-components";
 import PageContent from "../components/PageContent";
 import img from "../images/joeys-1600.jpg";
-import content from "../PageContentText/Joeys.json"
+import content from "../PageContentText/Joeys.json";
 
 const Background = styled.div`
   width: 100%;
@@ -20,15 +20,12 @@ const Background = styled.div`
   overflow: auto;
 `;
 
-const Joeys =() => {
-
-    return (
-        <Background>
-        <PageContent content={content} />
-      </Background>
-      )
-}
-
-
+const Joeys = () => {
+  return (
+    <Background>
+      <PageContent content={content} />
+    </Background>
+  );
+};
 
 export default Joeys;

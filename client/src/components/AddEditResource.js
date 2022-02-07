@@ -4,11 +4,7 @@ import { injectStyle } from "react-toastify/dist/inject-style";
 import { ADD_RESOURCE, EDIT_RESOURCE } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
-import {
-  ModalContainer,
-  ModalWrapper,
-  CloseModalButton,
-} from "./Modal.Styled";
+import { ModalContainer, ModalWrapper, CloseModalButton } from "./Modal.Styled";
 import {
   InputField,
   InputLabel,
@@ -81,17 +77,16 @@ const AddEditResource = ({
           variables: { ...userFormData },
         });
         if (data?.addResource.message === "Success") {
-          toast.success('Created Successfully', {
+          toast.success("Created Successfully", {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
-            pauseOnHover:false,
+            pauseOnHover: false,
             draggable: true,
             progress: undefined,
-            });
+          });
         }
-
       } catch (error) {
         console.error(error);
         clearForm();
@@ -103,15 +98,15 @@ const AddEditResource = ({
         });
 
         if (data?.editResource.message === "Success") {
-          toast.success('Updated Successfully', {
+          toast.success("Updated Successfully", {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
-            pauseOnHover:false,
+            pauseOnHover: false,
             draggable: true,
             progress: undefined,
-            });
+          });
         }
       } catch (error) {
         console.error(error);
@@ -194,13 +189,14 @@ const AddEditResource = ({
                   <Select
                     id="section"
                     name="section"
+                    value={userFormData.section}
                     onChange={handleInputChange}
                   >
-                    <option value="GENERAL" selected = {userFormData.section === "GENERAL" ? "selected": null}>General</option>
-                    <option value="JOEYS" selected = {userFormData.section === "JOEYS" ? "selected": null}>Joeys</option>
-                    <option value="CUBS" selected = {userFormData.section === "CUBS" ? "selected": null}>Cubs</option>
-                    <option value="SCOUTS" selected = {userFormData.section === "SCOUTS" ? "selected": null}>Scouts</option>
-                    <option value="VENTURERS" selected = {userFormData.section === "VENTURERS" ? "selected": null}>Venturers</option>
+                    <option value="GENERAL">General</option>
+                    <option value="JOEYS">Joeys</option>
+                    <option value="CUBS">Cubs</option>
+                    <option value="SCOUTS">Scouts</option>
+                    <option value="VENTURERS">Venturers</option>
                   </Select>
                 </RadioContainer>
               </Group>

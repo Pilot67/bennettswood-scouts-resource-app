@@ -3,7 +3,7 @@ import React from "react";
 import PageContent from "../components/PageContent";
 import styled from "styled-components";
 import img from "../images/venturers-1600.jpg";
-import content from "../PageContentText/Venturers.json"
+import content from "../PageContentText/Venturers.json";
 
 const Background = styled.div`
   width: 100%;
@@ -19,16 +19,15 @@ const Background = styled.div`
   background-size: cover;
   background-clip: border-box;
   overflow: auto;
-  @media screen and (max-width:768px) {
+  @media screen and (max-width: 768px) {
     background-position: 50% 40%;
   }
 `;
 
-
 const Venturers = () => {
   return (
     <Background>
-      <PageContent content={content}/>
+      <PageContent content={content} />
     </Background>
   );
 };

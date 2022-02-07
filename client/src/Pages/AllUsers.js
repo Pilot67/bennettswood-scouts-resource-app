@@ -11,18 +11,9 @@ import {
   InfoContainer,
   ResourceCard,
   ResourceTitleContainer,
-  ResourceTitle,
   ResourceTitleInfo,
-  ContentContainer,
-  ImageContainer,
-  DescriptionContainer,
-  Image,
-  LinkContainer,
-  CommentContainer,
-  CommentDescription,
   ResourcesBtnContainer,
   ResourcesBtn,
-  ResourcesBannerContainer,
 } from "./Resources.Styled";
 
 const AllUsers = () => {
@@ -68,78 +59,78 @@ const AllUsers = () => {
   }
 
   return (
-      <Background>
-        <PageContainer>
-          <InfoContainer>
-            {allUserData.map((userInfo, index) => {
-              return (
-                <ResourceCard key={index}>
-                  <ResourcesBtnContainer>
-                    <ResourcesBtn
-                      onClick={() => handleDeleteUser(userInfo.id)}
-                      color={"black"}
-                      background={"--bw-Red"}
-                    >
-                      <FaTrash />
-                    </ResourcesBtn>
-                    <ResourcesBtn
-                      onClick={() => handleEditUser(userInfo.id)}
-                      color={"white"}
-                      background={"--scouts"}
-                    >
-                      <FaEdit />
-                    </ResourcesBtn>
-                  </ResourcesBtnContainer>
+    <Background>
+      <PageContainer>
+        <InfoContainer>
+          {allUserData.map((userInfo, index) => {
+            return (
+              <ResourceCard key={index}>
+                <ResourcesBtnContainer>
+                  <ResourcesBtn
+                    onClick={() => handleDeleteUser(userInfo.id)}
+                    color={"black"}
+                    background={"--bw-Red"}
+                  >
+                    <FaTrash />
+                  </ResourcesBtn>
+                  <ResourcesBtn
+                    onClick={() => handleEditUser(userInfo.id)}
+                    color={"white"}
+                    background={"--scouts"}
+                  >
+                    <FaEdit />
+                  </ResourcesBtn>
+                </ResourcesBtnContainer>
 
-                  <ResourceTitleContainer>
-                    <ResourceTitleInfo>
-                      {userInfo.first_name} {userInfo.last_name}
-                    </ResourceTitleInfo>
-                  </ResourceTitleContainer>
-                  <ResourceTitleContainer>
-                    <ResourceTitleInfo>{userInfo.email}</ResourceTitleInfo>
-                  </ResourceTitleContainer>
-                  <ResourceTitleContainer>
-                    <ResourceTitleInfo>
-                      User type: {userInfo.user_type}
-                    </ResourceTitleInfo>
-                    <ResourceTitleInfo>
-                      Authorised:
-                      {userInfo.authorised_user ? (
-                        <ResourcesBtn
-                          onClick={() =>
-                            handleUpdateAuthorisation({
-                              id: userInfo.id,
-                              authorisedUser: false,
-                            })
-                          }
-                          color={"black"}
-                          background={"--scouts"}
-                        >
-                          <FaCheck />
-                        </ResourcesBtn>
-                      ) : (
-                        <ResourcesBtn
-                          onClick={() =>
-                            handleUpdateAuthorisation({
-                              id: userInfo.id,
-                              authorisedUser: true,
-                            })
-                          }
-                          color={"black"}
-                          background={"--bw-Red"}
-                        >
-                          <FaTimes />
-                        </ResourcesBtn>
-                      )}
-                    </ResourceTitleInfo>
-                  </ResourceTitleContainer>
-                </ResourceCard>
-              );
-            })}
-          </InfoContainer>
-        </PageContainer>
-      </Background>
+                <ResourceTitleContainer>
+                  <ResourceTitleInfo>
+                    {userInfo.first_name} {userInfo.last_name}
+                  </ResourceTitleInfo>
+                </ResourceTitleContainer>
+                <ResourceTitleContainer>
+                  <ResourceTitleInfo>{userInfo.email}</ResourceTitleInfo>
+                </ResourceTitleContainer>
+                <ResourceTitleContainer>
+                  <ResourceTitleInfo>
+                    User type: {userInfo.user_type}
+                  </ResourceTitleInfo>
+                  <ResourceTitleInfo>
+                    Authorised:
+                    {userInfo.authorised_user ? (
+                      <ResourcesBtn
+                        onClick={() =>
+                          handleUpdateAuthorisation({
+                            id: userInfo.id,
+                            authorisedUser: false,
+                          })
+                        }
+                        color={"black"}
+                        background={"--scouts"}
+                      >
+                        <FaCheck />
+                      </ResourcesBtn>
+                    ) : (
+                      <ResourcesBtn
+                        onClick={() =>
+                          handleUpdateAuthorisation({
+                            id: userInfo.id,
+                            authorisedUser: true,
+                          })
+                        }
+                        color={"black"}
+                        background={"--bw-Red"}
+                      >
+                        <FaTimes />
+                      </ResourcesBtn>
+                    )}
+                  </ResourceTitleInfo>
+                </ResourceTitleContainer>
+              </ResourceCard>
+            );
+          })}
+        </InfoContainer>
+      </PageContainer>
+    </Background>
   );
 };
 

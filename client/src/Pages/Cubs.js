@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import PageContent from "../components/PageContent";
 import img from "../images/cubs-1980.jpg";
-import content from "../PageContentText/Cubs.json"
+import content from "../PageContentText/Cubs.json";
 
 const Background = styled.div`
   width: 100%;
