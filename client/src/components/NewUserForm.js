@@ -181,7 +181,7 @@ const NewUserForm = ({ getUserId }) => {
               onClick={() =>
                 setUserFormData({ ...userFormData, userType: "ADMIN" })
               }
-              disabled={userData.user_type === "ADMIN" ? false : true}
+              disabled={Auth.getProfile().data.user_type === "ADMIN" ? false : true}
             />
             <label htmlFor="admin">Admin</label>
           </RadioContainer>

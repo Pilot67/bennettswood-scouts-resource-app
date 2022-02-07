@@ -1,11 +1,9 @@
 import React from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_ALL_USERS } from "../utils/queries";
-import { DELETE_USER , UPDATE_USER} from "../utils/mutations";
+import { DELETE_USER, UPDATE_USER } from "../utils/mutations";
 import { useNavigate } from "react-router-dom";
-
 import { FaEdit, FaTrash, FaCheck, FaTimes } from "react-icons/fa";
-
 import Auth from "../utils/Auth.js";
 import {
   Background,
@@ -38,45 +36,38 @@ const AllUsers = () => {
   const [deleteUser] = useMutation(DELETE_USER);
   const [updateUser] = useMutation(UPDATE_USER);
 
-
-   const handleDeleteUser = async (id) => {
+  const handleDeleteUser = async (id) => {
     try {
       const { data } = await deleteUser({ variables: { id } });
     } catch (error) {
       console.log(error);
     }
-     refetch(true);
-   };
-
-  const handleEditUser = (id) => {
-    console.log("Edit User", id)
-    navigate(`/UserAccount/${id}`)
-
+    refetch(true);
   };
 
-  
-  const handleUpdateAuthorisation = async ({id, authorisedUser}) =>{
-    try {
-      const { data } = await updateUser({
-        variables: { id, authorisedUser },
-      });
-      console.log("Data returned from update:", data);
-    } catch (e) {
-      console.error(e.message);
+  const handleEditUser = (id) => {
+    console.log("Edit User", id);
+    navigate(`/UserAccount/${id}`);
+  };
+
+  const handleUpdateAuthorisation = async ({ id, authorisedUser }) => {
+    if (Auth.loggedIn) {
+      try {
+        const { data } = await updateUser({
+          variables: { id, authorisedUser },
+        });
+      } catch (e) {
+        console.error(e.message);
+      }
+      refetch(true);
     }
-    refetch(true);
-  }
-  
-  
-  
+  };
+
   if (loading) {
     return <>Loading Data.....</>;
   }
 
-
-
   return (
-    <>
       <Background>
         <PageContainer>
           <InfoContainer>
@@ -116,7 +107,12 @@ const AllUsers = () => {
                       Authorised:
                       {userInfo.authorised_user ? (
                         <ResourcesBtn
-                          onClick={()=>handleUpdateAuthorisation({id:userInfo.id, authorisedUser:false})}
+                          onClick={() =>
+                            handleUpdateAuthorisation({
+                              id: userInfo.id,
+                              authorisedUser: false,
+                            })
+                          }
                           color={"black"}
                           background={"--scouts"}
                         >
@@ -124,14 +120,18 @@ const AllUsers = () => {
                         </ResourcesBtn>
                       ) : (
                         <ResourcesBtn
-                          onClick={()=>handleUpdateAuthorisation({id:userInfo.id, authorisedUser:true})}
+                          onClick={() =>
+                            handleUpdateAuthorisation({
+                              id: userInfo.id,
+                              authorisedUser: true,
+                            })
+                          }
                           color={"black"}
                           background={"--bw-Red"}
                         >
                           <FaTimes />
                         </ResourcesBtn>
-
-)}
+                      )}
                     </ResourceTitleInfo>
                   </ResourceTitleContainer>
                 </ResourceCard>
@@ -140,7 +140,6 @@ const AllUsers = () => {
           </InfoContainer>
         </PageContainer>
       </Background>
-    </>
   );
 };
 
