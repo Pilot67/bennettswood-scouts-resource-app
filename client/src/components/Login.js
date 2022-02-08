@@ -18,9 +18,7 @@ const Login = ({ handleSignUp }) => {
     email: "",
     password: "",
   });
-
   const [errMessage, setErrMessage] = useState("");
-
   const [login, { error, data }] = useMutation(LOGIN_USER);
 
   const handleInputChange = (event) => {
@@ -35,11 +33,10 @@ const Login = ({ handleSignUp }) => {
       setErrMessage("Email is invalid");
       return;
     }
-    if (userFormData.password.length < 8){
-      setErrMessage("Password is too short")
+    if (userFormData.password.length < 8) {
+      setErrMessage("Password is too short");
       return;
     }
-
 
     try {
       const { data } = await login({
@@ -60,10 +57,6 @@ const Login = ({ handleSignUp }) => {
       password: "",
     });
   };
-
-
-
-
 
   return (
     <>
