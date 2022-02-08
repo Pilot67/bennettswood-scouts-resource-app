@@ -9,8 +9,8 @@ const PageContent = ({content}) => {
       <br />
       <Paragraph>{content.description}</Paragraph>
       <List>
-        {content.points.map((item)=>{
-          return (<li>{item}</li>)
+        {content.points.map((item, index)=>{
+          return (<li key={index}>{item}</li>)
         })}
       </List>
       <Paragraph>{content.footer}</Paragraph>

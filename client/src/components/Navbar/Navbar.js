@@ -15,6 +15,8 @@ import {
   Lines,
   BlueLine,
   RedLine,
+  SignOutContainer,
+  Welcome
 } from "./Navbar.Styled";
 
 const Navbar = () => {
@@ -96,6 +98,7 @@ const Navbar = () => {
           )}
 
           {Auth.loggedIn() ? (
+            
             <SignMobileBtn
               onClick={handleSignOut}
               color={"white"}
@@ -114,7 +117,11 @@ const Navbar = () => {
           )}
         </NavMenu>
         {Auth.loggedIn() ? (
-          <SignBtn onClick={handleSignOut}>Sign Out</SignBtn>
+          <SignOutContainer>
+              {/* <span>Welcome {Auth.getProfile().data.first_name}</span> */}
+              <Welcome>Welcome {Auth.getProfile().data.first_name}</Welcome>
+            <SignBtn onClick={handleSignOut}>Sign Out</SignBtn>
+          </SignOutContainer>
         ) : (
           <SignBtn onClick={openModal}>Login / Signup</SignBtn>
         )}

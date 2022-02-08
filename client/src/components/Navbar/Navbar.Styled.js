@@ -164,3 +164,15 @@ export const HamburgerMenu = styled.div`
   }
 `;
 
+export const SignOutContainer = styled.div`
+display: flex;
+align-items: center;
+color: var(--bw-Blue);
+`
+export const Welcome = styled.p `
+padding: 0 1rem;
+@media screen and (max-width: 768px){
+  padding: 0 3.5rem;
+  
+}
+`

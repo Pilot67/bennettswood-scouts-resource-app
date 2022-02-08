@@ -20,7 +20,6 @@ const Background = styled.div`
   overflow: auto;
 `;
 const Cubs = () => {
-  console.log("img", img);
   return (
     <Background>
       <PageContent content={content} />
