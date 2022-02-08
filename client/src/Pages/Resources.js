@@ -210,9 +210,9 @@ const Resources = () => {
                         <>
                           <ResourceTitleInfo
                             onClick={() => setShowComments({ show: false })}
-                            style={{cursor:"pointer"}}
+                            style={{cursor:"pointer", color:"var(--scouts)"}}
                           >
-                            Comments <RiArrowUpSFill />
+                            Hide Comments <RiArrowUpSFill />
                           </ResourceTitleInfo>
                           {resource.resourcescomments.map((commentData) => {
                             return (
@@ -227,9 +227,9 @@ const Resources = () => {
                       ) : (
                         <ResourceTitleInfo
                           onClick={() => handleCommentShow(resource.id)}
-                          style={{cursor:"pointer"}}
+                          style={{cursor:"pointer", color:"var(--scouts)"}}
                         >
-                          Comments <RiArrowDownSFill />
+                          View Comments <RiArrowDownSFill />
                         </ResourceTitleInfo>
                       )}
                     </ResourceCard>
