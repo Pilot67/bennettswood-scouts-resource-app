@@ -1,13 +1,19 @@
 import React from "react";
-import { InfoContainer } from "./PageContent.Styled";
+import { InfoContainer, Heading, Paragraph, List } from "./PageContent.Styled";
 
 const PageContent = ({content}) => {
 
   return (
     <InfoContainer>
-      <h1 style={{textAlign:"center"}}>{content.title}</h1>
+      <Heading style={{textAlign:"center"}}>{content.title}</Heading>
       <br />
-      <p>{content.description}</p>
+      <Paragraph>{content.description}</Paragraph>
+      <List>
+        {content.points.map((item)=>{
+          return (<li>{item}</li>)
+        })}
+      </List>
+      <Paragraph>{content.footer}</Paragraph>
     </InfoContainer>
   );
 };

@@ -5,7 +5,7 @@ export const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   margin: 30px auto 20px auto;
   padding: 3rem 3rem;
   width: 75%;
@@ -20,3 +20,18 @@ export const InfoContainer = styled.div`
   padding: 1rem 1rem;
 }
 `;
+export const Heading = styled.h1 `
+text-align: center;
+align-self: center;
+padding: .5rem 0;
+`
+export const List = styled.ul `
+margin-left: 2rem;
+padding: 1rem 0;
+list-style: disc;
+`
+export const Paragraph = styled.p `
+margin: 0;
+text-align: left;
+padding: .5rem 0;
+`
