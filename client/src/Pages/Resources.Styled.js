@@ -17,13 +17,13 @@ export const Background = styled.div`
   overflow: none;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   opacity: 1;
 `;
 
 export const PageContainer = styled.div`
   background-color: rgba(55, 55, 55, 0.9);
-  display: flex;
+  display: block;
   justify-content: center;
   margin: 0px auto 0px auto;
   padding: 1rem 0 120px 0;

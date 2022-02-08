@@ -28,8 +28,6 @@ const AddEditResource = ({
   setRefetchData,
   resourceData,
 }) => {
-  // let id = 1;
-  //  console.log(resourceData.title)
   const modalRef = useRef();
   const [addResource, { error, data }] = useMutation(ADD_RESOURCE);
   const [editResource, { editError, editData }] = useMutation(EDIT_RESOURCE);
@@ -118,8 +116,6 @@ const AddEditResource = ({
     clearForm();
     handleCloseModal();
   };
-
-  //setUserFormData({...userFormData, title:"Title Set by Me"})
 
   const handleInputChange = (event) => {
     setErrMessage("");

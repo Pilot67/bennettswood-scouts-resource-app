@@ -41,8 +41,6 @@ const AddResourcesComment = ({
   };
   const handleCloseModal = () => setShowModal((prev) => !prev);
 
-  //const errMessage = () => {};
-
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
     if (Auth.loggedIn) {
