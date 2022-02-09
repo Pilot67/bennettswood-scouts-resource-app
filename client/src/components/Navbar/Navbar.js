@@ -119,7 +119,7 @@ const Navbar = () => {
         {Auth.loggedIn() ? (
           <SignOutContainer>
               {/* <span>Welcome {Auth.getProfile().data.first_name}</span> */}
-              <Welcome>Welcome {Auth.getProfile().data.first_name}</Welcome>
+              <Welcome>Hello, {Auth.getProfile().data.first_name}</Welcome>
             <SignBtn onClick={handleSignOut}>Sign Out</SignBtn>
           </SignOutContainer>
         ) : (

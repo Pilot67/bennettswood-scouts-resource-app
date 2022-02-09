@@ -170,8 +170,10 @@ align-items: center;
 color: var(--bw-Blue);
 `
 export const Welcome = styled.p `
+font-size: 1.25rem;
 padding: 0 1rem;
 @media screen and (max-width: 768px){
+  font-size: 1rem;
   padding: 0 3.5rem;
   
 }

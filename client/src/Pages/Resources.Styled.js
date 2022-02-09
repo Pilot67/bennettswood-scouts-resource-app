@@ -143,9 +143,10 @@ export const CommentContainer = styled.div`
   margin: 5px 30px 0 30px;
   color: #ffffff;
   padding: 0.5rem;
-  /* box-shadow: 0 0 2px 1px var(--bw-Grey); */
+  border-left: 4px solid var(--bw-Blue);
   @media screen and (max-width: 768px) {
-    margin: 5px 15px 0 15px;
+    margin: 5px 10px 0 10px;
+    border-left: 2px solid var(--bw-Blue);
 
   }
 `;
